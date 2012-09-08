@@ -18,7 +18,5 @@
 //= require ember
 //= require ember-data
 //= require_self
-//= require moviez
+//= require moviez/moviez
 Moviez = Ember.Application.create();
-//
-//= require_tree .
