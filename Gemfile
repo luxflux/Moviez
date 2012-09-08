@@ -10,7 +10,7 @@ group :assets do
   gem 'zurb-foundation'
 end
 
-gem 'jquery-rails'
+gem 'jquery-rails', '~> 2.0.3'
 
 gem 'unicorn'
 gem 'haml'
