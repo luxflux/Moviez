@@ -13,4 +13,4 @@
         %a{:_action => 'showMovie movie href=true'}= hb 'movie.title'
       %td= hb 'movie.description'
       %td= hb 'movie.discNumber'
-      %td= hb 'movie.watched'
+      %td= hb 'movie.watched_human'

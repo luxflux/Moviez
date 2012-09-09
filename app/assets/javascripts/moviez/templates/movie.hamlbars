@@ -6,6 +6,6 @@
     %td= hb 'content.discNumber'
   %tr
     %th Watched?
-    %td= hb 'content.watched'
+    %td= hb 'content.watched_human'
 
 %p= hb 'content.description'
