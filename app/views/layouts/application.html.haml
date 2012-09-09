@@ -5,15 +5,4 @@
   = javascript_include_tag 'application'
   = csrf_meta_tags
 %body
-  %header
-    .container
-      .row.nav-bar.top-bar
-        .nine-columns
-        .three-columns
-          .row.collapse
-            .eight.mobile-three.columns
-              %input{type: :text}
-            .four.mobile-one.columns
-              %a.postfix.button.expand{href: '#'} Search
-  .container
-    = yield
+  = yield
