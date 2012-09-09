@@ -1,4 +1,4 @@
-Moviez.movieView = Ember.View.extend({
+Moviez.MovieView = Ember.View.extend({
   templateName: 'moviez/templates/movie',
   moviesBinding: 'Moviez.moviesController',
 
