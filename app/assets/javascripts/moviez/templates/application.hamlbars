@@ -1,6 +1,5 @@
-%header
-  .container
-    .row= hb 'outlet navigation'
+.container
+  = hb 'outlet navigation'
 
 .container
   .row
