@@ -1,0 +1,11 @@
+%h2= hb 'content.title'
+
+%table
+  %tr
+    %th Disc Number
+    %td= hb 'content.discNumber'
+  %tr
+    %th Watched?
+    %td= hb 'content.watched'
+
+%p= hb 'content.description'

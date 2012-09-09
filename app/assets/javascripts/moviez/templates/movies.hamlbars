@@ -1,0 +1,16 @@
+%h2 Movies in the database
+
+%table
+  %tr
+    %th Title
+    %th Description
+    %th Disc number
+    %th Watched?
+
+  = hb 'each movie in controller' do
+    %tr
+      %td
+        %a{:_action => 'showMovie movie href=true'}= hb 'movie.title'
+      %td= hb 'movie.description'
+      %td= hb 'movie.discNumber'
+      %td= hb 'movie.watched'
