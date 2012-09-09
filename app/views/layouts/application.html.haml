@@ -1,14 +1,19 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Moviez</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-
-<%= yield %>
-
-</body>
-</html>
+!!! 5
+%head
+  %title Moviez
+  = stylesheet_link_tag 'application', media: 'all'
+  = javascript_include_tag 'application'
+  = csrf_meta_tags
+%body
+  %header
+    .container
+      .row.nav-bar.top-bar
+        .nine-columns
+        .three-columns
+          .row.collapse
+            .eight.mobile-three.columns
+              %input{type: :text}
+            .four.mobile-one.columns
+              %a.postfix.button.expand{href: '#'} Search
+  .container
+    = yield
