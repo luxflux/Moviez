@@ -1,9 +1,16 @@
-<h1>Movies</h1>
+<h2>Movies in the database</h2>
 <table>
   <tr>
     <th>Title</th>
     <th>Description</th>
     <th>Disc number</th>
     <th>Watched</th>
-
-{{outlet}}
+  </tr>
+  {{#each movie in controller}}
+    <tr>
+      <td><a {{action showMovie movie href=true}}>{{movie.title}}</a></td>
+      <td>{{movie.description}}</td>
+      <td>{{movie.discNumber}}</td>
+      <td>{{movie.watched}}</td>
+    </tr>
+  {{/each}}
