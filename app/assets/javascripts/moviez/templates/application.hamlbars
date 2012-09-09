@@ -1,13 +1,5 @@
 %header
   .container
-    .row.nav-bar.top-bar
-      .nine-columns
-      .three-columns
-        .row.collapse
-          .eight.mobile-three.columns
-            %input{type: :text}
-          .four.mobile-one.columns
-            %a.postfix.button.expand{href: '#'} Search
-%h1 Moviez Application
+    .row= hb 'outlet navigation'
 
-{{outlet}}
+= hb 'outlet'

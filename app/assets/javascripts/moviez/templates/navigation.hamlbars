@@ -1,0 +1,11 @@
+%ul.nav-bar.top-bar
+  = hb 'view view.NavItemView', item: 'home' do
+    %a{:_action => 'showHome'} Moviezzzz
+  = hb 'view view.NavItemView', item: 'about' do
+    %a{:_action => 'showAbout'} About
+  %li.right
+    .row.collapse
+      .eight.mobile-three.columns
+        %input{type: :text}
+      .four.mobile-one.columns
+        %a.postfix.button.expand{href: '#'} Search
