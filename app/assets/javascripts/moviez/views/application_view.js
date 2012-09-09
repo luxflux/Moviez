@@ -1,3 +1,3 @@
 Moviez.ApplicationView = Ember.View.extend({
-  templateName: 'application'
+  templateName: 'moviez/templates/application'
 });
