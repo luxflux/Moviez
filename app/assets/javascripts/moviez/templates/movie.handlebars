@@ -1,5 +1,12 @@
-<h1>Movie</h1>
-
-<p>Your content here.</p>
-
-{{outlet}}
+<h2>{{content.title}}</h2>
+<table>
+  <tr>
+    <th>Disc Number</th>
+    <td>{{content.discNumber}}</td>
+  </tr>
+  <tr>
+    <th>Watched?</th>
+    <td>{{content.watched}}</td>
+  </tr>
+</table>
+<p>{{content.description}}</p>
