@@ -1,5 +1,5 @@
 Moviez::Application.routes.draw do
   resources :movies
 
-  root :to => 'movies#index'
+  root :to => 'welcome#home'
 end
