@@ -1,6 +1,7 @@
 Moviez.Movie = DS.Model.extend({
-  title: DS.attr(''),
+  id: DS.attr('number'),
+  title: DS.attr('string'),
   description: DS.attr('string'),
-  discNumber: DS.attr('integer'),
+  discNumber: DS.attr('number'),
   watched: DS.attr('boolean')
 });
