@@ -22,13 +22,15 @@ Moviez.Router = Ember.Router.extend(
 
     movies: Ember.Route.extend(
       route: '/movies'
+
       showMovie: Ember.Route.transitionTo 'show'
+
+      connectOutlets: (router) ->
+        router.get('applicationController').connectOutlet('navigation', 'navigation')
 
       index: Ember.Route.extend(
         route: '/'
         connectOutlets: (router) ->
-          router.get('applicationController').connectOutlet('navigation', 'navigation')
-
           router.set 'navigationController.selected', 'home'
           router.get('applicationController').connectOutlet('movies', Moviez.Movie.find())
       )
