@@ -1,3 +1,4 @@
 Moviez.MoviesView = Ember.View.extend({
-  templateName: 'movies'
+  templateName: 'moviez/templates/movies',
+  tagName:      'tr'
 });
