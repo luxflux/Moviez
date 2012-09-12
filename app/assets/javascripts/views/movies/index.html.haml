@@ -1,6 +1,12 @@
-%h2 Movies in the database
-%form
-  %input{type: :text, placeholder: 'Filter movies', autofocus: 'autofocus', data: {bind: 'controllers.movies.filter'}}
+%h2
+  Movies in the database
+
+.row
+  .eleven.columns
+    %form
+      %input{type: :text, placeholder: 'Filter movies', autofocus: 'autofocus', data: {bind: 'controllers.movies.filter'}}
+  .one.column
+    %a{data: {route: 'routes.movies.new'}} New
 
 .row{data: {'foreach-movie' => 'controllers.movies.filtered_movies', mixin: 'animation'}}
   .two.columns.text-center
