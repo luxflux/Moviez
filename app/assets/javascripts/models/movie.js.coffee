@@ -5,3 +5,7 @@ class Moviez.Movie extends Batman.Model
 
   @encode 'title', 'description', 'disc_number', 'watched'
 
+  @validate 'title', presence: true
+  @validate 'description', presence: true
+  @validate 'disc_number', presence: true
+
