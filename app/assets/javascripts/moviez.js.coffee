@@ -2,12 +2,8 @@ window.Moviez = class Moviez extends Batman.App
 
   Batman.ViewStore.prefix = 'assets/views'
 
-  @navLinks: [
-    {href: '/#!/movies/', controller: 'movies', text: 'Moviezzzz'},
-    {href: '/#!/about', controller: 'about', text: 'About'},
-  ]
-
   @resources 'movies'
+  @route 'about', 'about#index'
   @root 'movies'
 
   @on 'run', ->

@@ -1,9 +1,5 @@
 class Moviez.MoviesController extends Batman.Controller
 
-  constructor: ->
-    super
-    #@set 'filter', null
-
   routingKey: 'movies'
 
   index: (params) ->

@@ -10,8 +10,10 @@
   .row
     .twelve.columns
       %ul.nav-bar.top-bar
-        %li{data: {'foreach-nav' => 'window.Moviez.navLinks', 'addclass-active' => 'window.Moviez.currentRoute.controller | matches nav.controller'}}
-          %a{data: {bind: 'nav.text', 'bind-href' => 'nav.href'}}
+        %li{data: {'addclass-active' => 'window.Moviez.currentRoute.controller | matches "movies"'}}
+          %a{data: {route: 'routes.movies'}} Moviezzzz
+        %li{data: {'addclass-active' => 'window.Moviez.currentRoute.controller | matches "about"'}}
+          %a{data: {route: 'routes.about'}} About
 
 .container
   .row
