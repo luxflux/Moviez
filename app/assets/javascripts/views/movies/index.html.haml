@@ -1,4 +1,6 @@
 %h2 Movies in the database
+%form
+  %input{type: :text, placeholder: 'Filter movies'}
 
 .row{data: {'foreach-movie' => 'movies', mixin: 'animation'}}
   .two.columns.text-center

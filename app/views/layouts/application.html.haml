@@ -7,27 +7,23 @@
   %meta{name: 'viewport', content: 'width=device-width, initial-scale=1.0'}
 %body
 .container
-  .row.nav-bar.top-bar
-    .six.columns
+  .row
+    .twelve.columns
       %ul.nav-bar.top-bar
         %li{data: {'foreach-nav' => 'window.Moviez.navLinks', 'addclass-active' => 'window.Moviez.currentRoute.controller | matches nav.controller'}}
           %a{data: {bind: 'nav.text', 'bind-href' => 'nav.href'}}
-    .six.columns
-      %form
-        .row.collapse
-          .eight.mobile-three.columns
-            %input{type: :text}
-          .four.mobile-one.columns
-            %a.postfix.button.expand{href: '#'} Search
 
 .container
   .row
-    %p#flashnotice.alert-box.success{data: {showif: 'window.BatmanRailsDemo.flash.success.length'}}
-      %a.close{href: '#'}
-      %span{data: {bind: 'window.BatmanRailsDemo.flash.success'}}
-    %p#flashnotice.alert-box.error{data: {showif: 'window.BatmanRailsDemo.flash.error.length'}}
-      %a.close{href: '#'}
-      %span{data: {bind: 'window.BatmanRailsDemo.flash.error'}}
+    .twelve.columns
+      %p#flashnotice.alert-box.success{data: {showif: 'window.BatmanRailsDemo.flash.success.length'}}
+        %a.close{href: '#'}
+        %span{data: {bind: 'window.BatmanRailsDemo.flash.success'}}
+      %p#flashnotice.alert-box.error{data: {showif: 'window.BatmanRailsDemo.flash.error.length'}}
+        %a.close{href: '#'}
+        %span{data: {bind: 'window.BatmanRailsDemo.flash.error'}}
 
 .container
-  .row{data: {yield: :main}}
+  .row
+    .twelve.columns
+      %div{data: {yield: :main}}
