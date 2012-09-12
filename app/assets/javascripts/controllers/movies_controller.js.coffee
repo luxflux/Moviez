@@ -10,7 +10,19 @@ class Moviez.MoviesController extends Batman.Controller
     @set 'movie', Moviez.Movie.find parseInt(params.id, 10), (err) ->
       throw err if err
 
+  new: (params) ->
+    @set 'movie', new Moviez.Movie()
+    @form = @render()
+
   create: (params) ->
+    @get('movie').save (err) =>
+      $('#new_movie').attr('disabled', false)
+
+      if err
+        throw err unless err instanceof Batman.ErrorsSet
+      else
+        Moviez.flashSuccess "#{@get('movie.title')} added successfully!"
+        @redirect 'routes.movies'
 
   update: (params) ->
 
