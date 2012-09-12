@@ -15,6 +15,8 @@
 //= require foundation
 //
 
+//= require_tree ./lib
+
 // Batman.js and its adapters
 //= require batman/es5-shim
 //= require batman/batman

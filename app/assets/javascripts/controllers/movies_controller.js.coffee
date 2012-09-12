@@ -1,5 +1,9 @@
 class Moviez.MoviesController extends Batman.Controller
 
+  constructor: ->
+    super
+    #@set 'filter', null
+
   routingKey: 'movies'
 
   index: (params) ->
@@ -16,3 +20,15 @@ class Moviez.MoviesController extends Batman.Controller
 
   destroy: (params) ->
 
+
+  @accessor 'filtered_movies',
+    get: ->
+      movies = Moviez.get('Movie.all')
+      if filter = @get('filter')
+        movies.filter (movie) ->
+          title = movie.get('title')
+          description = movie.get('description')
+          pattern = build_filter_regexp filter
+          (title and title.match(pattern)) or (description and description.match(pattern))
+      else
+        movies

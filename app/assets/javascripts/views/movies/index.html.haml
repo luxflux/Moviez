@@ -1,14 +1,14 @@
 %h2 Movies in the database
 %form
-  %input{type: :text, placeholder: 'Filter movies'}
+  %input{type: :text, placeholder: 'Filter movies', autofocus: 'autofocus', data: {bind: 'controllers.movies.filter'}}
 
-.row{data: {'foreach-movie' => 'movies', mixin: 'animation'}}
+.row{data: {'foreach-movie' => 'controllers.movies.filtered_movies', mixin: 'animation'}}
   .two.columns.text-center
     %img{src: 'http://www.placehold.it/100x150', data: { 'bind-alt' => 'movie.title' }}
   .ten.columns
     %h3
-      %a{data: {route: 'movie', bind: 'movie.title'}}
+      %a{data: {route: 'routes.movies[movie]', bind: 'movie.title | label_filter "filter-found" | raw'}}
       %small
         %span{data: {bind: 'movie.disc_number'}}
         %span{data: {bind: 'movie.watched | watched_human'}}
-    %span{data: {bind: 'movie.description'}}
+    %span{data: {bind: 'movie.description | label_filter "radius label" | raw'}}

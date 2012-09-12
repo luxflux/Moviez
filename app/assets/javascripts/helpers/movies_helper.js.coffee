@@ -7,3 +7,5 @@ Batman.mixin Batman.Filters,
     else
       'Not yet watched'
 
+  label_filter: (input, cssClasses) ->
+    highlight input, Moviez.get('controllers.movies.filter'), cssClasses
