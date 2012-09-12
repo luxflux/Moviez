@@ -28,4 +28,5 @@ group :development do
   gem 'guard-rspec'
   gem 'guard-rails'
   gem 'rb-fsevent'
+  gem 'powder'
 end
