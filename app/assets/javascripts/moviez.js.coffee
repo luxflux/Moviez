@@ -1,13 +1,20 @@
 window.Moviez = class Moviez extends Batman.App
 
-  # @root 'controller#all'
-  # @route '/controller/:id', 'controller#show', resource: 'model', action: 'show'
+  Batman.ViewStore.prefix = 'assets/views'
+
+  @navLinks: [
+    {href: '/#!/movies/', controller: 'movies', text: 'Moviezzzz'},
+    {href: '/#!/about', controller: 'about', text: 'About'},
+  ]
+
+  @resources 'movies'
+  @root 'movies'
 
   @on 'run', ->
-    console?.log "Running ...."
+    console?.log 'Running ....'
 
   @on 'ready', ->
-    console?.log "Moviez ready for use."
+    console?.log 'Moviez ready for use.'
 
   @flash: Batman()
   @flash.accessor

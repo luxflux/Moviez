@@ -1,0 +1,12 @@
+%h2 Movies in the database
+
+.row{data: {'foreach-movie' => 'movies', mixin: 'animation'}}
+  .two.columns.text-center
+    %img{src: 'http://www.placehold.it/100x150', data: { 'bind-alt' => 'movie.title' }}
+  .ten.columns
+    %h3
+      %a{data: {route: 'movie', bind: 'movie.title'}}
+      %small
+        %span{data: {bind: 'movie.disc_number'}}
+        %span{data: {bind: 'movie.watched'}}
+    %span{data: {bind: 'movie.description'}}
