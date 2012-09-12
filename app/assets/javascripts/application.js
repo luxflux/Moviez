@@ -14,9 +14,23 @@
 //= require jquery_ujs
 //= require foundation
 //
-//= require handlebars
-//= require ember
-//= require ember-data
+
+// Batman.js and its adapters
+//= require batman/es5-shim
+//= require batman/batman
+//= require batman/batman.jquery
+//= require batman/batman.rails
+
+//= require moviez
+
+//= require_tree ./models
+//= require_tree ./controllers
+//= require_tree ./helpers
+
+
 //= require_self
-//= require moviez/moviez
-Moviez = Ember.Application.create();
+// Run the Batman app
+$(document).ready(function(){
+  Moviez.run();
+});
+

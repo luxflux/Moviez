@@ -8,7 +8,6 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
   gem 'compass-rails'
   gem 'zurb-foundation'
-  gem 'hamlbars'
 end
 
 gem 'jquery-rails', '~> 2.0.3'
@@ -16,8 +15,9 @@ gem 'jquery-rails', '~> 2.0.3'
 gem 'unicorn'
 gem 'haml'
 gem 'haml-rails'
+gem 'haml_assets'
 
-gem 'ember-rails'
+gem 'batman-rails'
 
 group :development do
   gem 'rspec-rails'
