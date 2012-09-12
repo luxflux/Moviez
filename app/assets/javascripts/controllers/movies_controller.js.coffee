@@ -7,6 +7,8 @@ class Moviez.MoviesController extends Batman.Controller
       @set 'movies', results
 
   show: (params) ->
+    @set 'movie', Moviez.Movie.find parseInt(params.id, 10), (err) ->
+      throw err if err
 
   create: (params) ->
 

@@ -1,0 +1,11 @@
+%h2{data: {bind: 'movie.title'}}
+
+%table
+  %tr
+    %th Disc Number
+    %td{data: {bind: 'movie.disc_number'}}
+  %tr
+    %th Watched?
+    %td{data: {bind: 'movie.watched'}}
+
+%p{data: {bind: 'movie.description'}}
