@@ -1,6 +1,0 @@
-.container
-  = hb 'outlet navigation'
-
-.container
-  .row
-    = hb 'outlet'
