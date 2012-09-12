@@ -3,7 +3,8 @@ window.build_filter_regexp = (what) ->
 
 
 window.highlight = (content, what, spanClass) ->
-  return content if what == ''
+  return content unless what
+  return content unless content
 
   pattern = build_filter_regexp what
   replaceWith = '<span class="' + spanClass + '">$1</span>'
