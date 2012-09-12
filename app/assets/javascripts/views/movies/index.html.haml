@@ -10,5 +10,5 @@
       %a{data: {route: 'movie', bind: 'movie.title'}}
       %small
         %span{data: {bind: 'movie.disc_number'}}
-        %span{data: {bind: 'movie.watched'}}
+        %span{data: {bind: 'movie.watched | watched_human'}}
     %span{data: {bind: 'movie.description'}}

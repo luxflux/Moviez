@@ -1,3 +1,5 @@
+%a{data: {route: 'movies'}} Back
+
 %h2{data: {bind: 'movie.title'}}
 
 %table
@@ -6,6 +8,6 @@
     %td{data: {bind: 'movie.disc_number'}}
   %tr
     %th Watched?
-    %td{data: {bind: 'movie.watched'}}
+    %td{data: {bind: 'movie.watched | watched_human'}}
 
 %p{data: {bind: 'movie.description'}}
