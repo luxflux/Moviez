@@ -1,0 +1,14 @@
+%label Title
+%input{type: 'text', name: 'movie[title]', data: {bind: 'movie.title'}}
+
+.row
+  .four.columns
+    %label Disc Number
+    %input{type: 'number', name: 'movie[disc_number]', data: {bind: 'movie.disc_number'}}
+  .eight.columns
+    %label Watched?
+    %input{type: 'checkbox', name: 'movie[watched]', data: {bind: 'movie.watched'}}
+
+%textarea{name: 'description', name: 'movie[description]', data: {bind: 'movie.description'}}
+
+%input.button.primary{type: 'submit', name: 'commit'}
