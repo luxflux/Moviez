@@ -15,11 +15,22 @@ class Moviez.MoviesController extends Batman.Controller
     @form = @render()
 
   create: (params) ->
-    @get('movie').save (err) =>
-      $('#new_movie').attr('disabled', false)
+    @get('movie').save (err, movie) =>
 
       if err
+        converted_errors = {}
+        for error in movie.errors.toArray()
+          console.log error.attribute
+          converted_errors[error.attribute] = [] unless converted_errors[error.attribute]
+          converted_errors[error.attribute].push error.message
+
+        console.log converted_errors
+
+        #console.log movie.errors.get('title').toArray()[0].message
+        #
         throw err unless err instanceof Batman.ErrorsSet
+        Moviez.flashError "There were errors!"
+        @set 'converted_errors', converted_errors
       else
         Moviez.flashSuccess "#{@get('movie.title')} added successfully!"
         @redirect 'routes.movies'

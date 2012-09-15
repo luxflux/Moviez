@@ -9,3 +9,7 @@ Batman.mixin Batman.Filters,
 
   label_filter: (input, cssClasses) ->
     highlight input, Moviez.get('controllers.movies.filter'), cssClasses
+
+  inspect: (input) ->
+    console.log input
+    input
