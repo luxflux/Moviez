@@ -15,6 +15,7 @@ gem 'jquery-rails', '~> 2.0.3'
 gem 'unicorn'
 gem 'haml'
 gem 'haml-rails'
+gem 'simple_form'
 
 group :development do
   gem 'rspec-rails'
