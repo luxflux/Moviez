@@ -14,25 +14,3 @@
 //= require jquery_ujs
 //= require foundation
 //
-
-//= require_tree ./lib
-
-// Batman.js and its adapters
-//= require batman/es5-shim
-//= require batman/batman
-//= require batman/batman.jquery
-//= require batman/batman.rails
-
-//= require moviez
-
-//= require_tree ./models
-//= require_tree ./controllers
-//= require_tree ./helpers
-
-
-//= require_self
-// Run the Batman app
-$(document).ready(function(){
-  Moviez.run();
-});
-
