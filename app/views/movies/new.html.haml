@@ -2,6 +2,6 @@
 
 .row
   .twelve.columns
-    %form#new_movie{"accept-charset" => "UTF-8", "data-event-submit" => "create", "data-formfor-movie" => "movie"}
-      %div{"data-partial" => "movies/_form"}
+    = form_for @movie do |f|
+      = render partial: 'form', locals: {f: f}
 

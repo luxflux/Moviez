@@ -10,22 +10,18 @@
   .row
     .twelve.columns
       %ul.nav-bar.top-bar
-        %li{data: {'addclass-active' => 'window.Moviez.currentRoute.controller | matches "movies"'}}
-          %a{data: {route: 'routes.movies'}} Moviezzzz
-        %li{data: {'addclass-active' => 'window.Moviez.currentRoute.controller | matches "about"'}}
-          %a{data: {route: 'routes.about'}} About
+        %li= link_to 'Moviezzz', movies_path
+        %li= link_to 'About', '/about'
 
 .container
   .row
     .twelve.columns
-      %p#flashnotice.alert-box.success{data: {showif: 'window.BatmanRailsDemo.flash.success.length'}}
-        %a.close{href: '#'}
-        %span{data: {bind: 'window.BatmanRailsDemo.flash.success'}}
-      %p#flashnotice.alert-box.error{data: {showif: 'window.BatmanRailsDemo.flash.error.length'}}
-        %a.close{href: '#'}
-        %span{data: {bind: 'window.BatmanRailsDemo.flash.error'}}
+      - [:alert, :success, :info].each do |msg_type|
+        .alert-box{class: msg_type}
+          %a.close{href: '#'} &times
+          %span= flash[msg_type]
 
 .container
   .row
     .twelve.columns
-      %div{data: {yield: :main}}
+      = yield

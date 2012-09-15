@@ -1,13 +1,13 @@
-%a{data: {route: 'routes.movies'}} Back
+= link_to 'Back', movies_path
 
-%h2{data: {bind: 'movie.title'}}
+%h2= @movie.title
 
 %table
   %tr
     %th Disc Number
-    %td{data: {bind: 'movie.disc_number'}}
+    %td= @movie.disc_number
   %tr
     %th Watched?
-    %td{data: {bind: 'movie.watched | watched_human'}}
+    %td= @movie.watched
 
-%p{data: {bind: 'movie.description'}}
+%p= @movie.description
