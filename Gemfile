@@ -15,9 +15,6 @@ gem 'jquery-rails', '~> 2.0.3'
 gem 'unicorn'
 gem 'haml'
 gem 'haml-rails'
-gem 'haml_assets'
-
-gem 'batman-rails'
 
 group :development do
   gem 'rspec-rails'
