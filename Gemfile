@@ -18,6 +18,7 @@ gem 'haml-rails'
 gem 'simple_form'
 gem 'pg_search'
 gem 'poirot'
+gem 'draper'
 
 group :development do
   gem 'rspec-rails'

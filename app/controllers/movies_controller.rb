@@ -5,7 +5,7 @@ class MoviesController < ApplicationController
   # GET /movies
   # GET /movies.json
   def index
-    @movies = Movie.text_search(params[:query])
+    @movies = MovieDecorator.decorate(Movie.text_search(params[:query]))
     respond_with @movies
   end
 

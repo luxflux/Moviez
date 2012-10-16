@@ -6,7 +6,7 @@ module Movies
     end
 
     def image
-      'http://www.placehold.it/100x150'
+      movie.image
     end
 
     def disc_number
@@ -22,7 +22,7 @@ module Movies
     end
 
     def url
-      movie_path movie
+      movie.url
     end
 
   end
