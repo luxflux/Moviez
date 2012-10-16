@@ -8,6 +8,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
   gem 'compass-rails'
   gem 'zurb-foundation'
+  gem 'hamlbars'
 end
 
 gem 'jquery-rails', '~> 2.0.3'
@@ -17,6 +18,7 @@ gem 'haml'
 gem 'haml-rails'
 gem 'simple_form'
 gem 'pg_search'
+gem 'ember-rails', git: 'https://github.com/NOX73/ember-rails.git'
 
 group :development do
   gem 'rspec-rails'
