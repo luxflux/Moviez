@@ -5,6 +5,9 @@ class Movie < ActiveRecord::Base
   validates :description, presence: true
   validates :disc_number, presence: true
 
+  include PgSearch
+  pg_search_scope :search, against: [:title, :description]
+
   def self.text_search(query)
     if query.present?
       search query
