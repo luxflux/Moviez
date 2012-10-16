@@ -16,6 +16,7 @@ gem 'unicorn'
 gem 'haml'
 gem 'haml-rails'
 gem 'simple_form'
+gem 'texticle', "2.0", require: 'texticle/rails'
 
 group :development do
   gem 'rspec-rails'
