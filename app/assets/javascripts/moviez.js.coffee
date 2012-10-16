@@ -1,13 +1,24 @@
 jQuery ->
-  for input in $('input[data-observe]')
-    $(input).observe_field $(input).data('observe'), ->
+  for input in $('input[data-observe-multiple]')
+
+    element_name = $(input).data('observe-multiple')
+    observe_timer = $(input).data('observe-timer') || 2
+    replace_target = $('#' + $(input).data('observe-target'))
+
+    console.log element_name, observe_timer, replace_target
+
+    $(input).observe_field observe_timer, ->
       $("#spinner").show()
       form = $(this).parents 'form'
       url = form.attr 'action'
       formData = form.serialize()
 
       $.get url + '.json', formData, (data) ->
-        $('#movies').html('')
-        for movie in data
-          $('#movies').append poirot.movie(movie)
+        replace_target.html('')
+
+        for element in data
+          elements = {}
+          elements[element_name] = element
+          replace_target.append poirot[element_name](elements)
+
         $('#spinner').hide()

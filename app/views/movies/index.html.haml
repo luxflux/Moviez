@@ -3,7 +3,7 @@
 .row
   .ten.columns
     = form_tag movies_path, method: :get do
-      = text_field_tag :query, params[:query], placeholder: 'Filter movies', autofocus: 'autofocus', data: {observe: 1}
+      = text_field_tag :query, params[:query], placeholder: 'Filter movies', autofocus: 'autofocus', 'data-observe-multiple' => :movie, 'data-observe-target' => :movies
   .two.columns
     = link_to 'New Movie', new_movie_path, class: [:button, :small]
 
