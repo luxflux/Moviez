@@ -5,4 +5,12 @@ class Movie < ActiveRecord::Base
   validates :description, presence: true
   validates :disc_number, presence: true
 
+  def self.text_search(query)
+    if query.present?
+      search query
+    else
+      scoped
+    end
+  end
+
 end
