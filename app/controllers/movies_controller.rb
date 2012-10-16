@@ -5,7 +5,7 @@ class MoviesController < ApplicationController
   # GET /movies
   # GET /movies.json
   def index
-    @movies = Movie.all
+    @movies = Movie.text_search(params[:query])
     respond_with @movies
   end
 

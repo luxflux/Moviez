@@ -2,8 +2,8 @@
 
 .row
   .ten.columns
-    %form
-      %input{type: :text, placeholder: 'Filter movies', autofocus: 'autofocus', data: {bind: 'controllers.movies.filter'}}
+    = form_tag movies_path, method: :get do
+      = text_field_tag :query, params[:query], placeholder: 'Filter movies', autofocus: 'autofocus'
   .two.columns
     = link_to 'New Movie', new_movie_path, class: [:button, :small]
 
