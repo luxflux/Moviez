@@ -13,5 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require foundation
+//= require poirot
 //
 //= require_tree .
