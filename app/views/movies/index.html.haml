@@ -7,5 +7,6 @@
   .two.columns
     = link_to 'New Movie', new_movie_path, class: [:button, :small]
 
+= template_include_tag 'movie'
 #movies
   = render @movies

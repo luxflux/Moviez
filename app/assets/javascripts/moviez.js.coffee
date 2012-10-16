@@ -6,6 +6,8 @@ jQuery ->
       url = form.attr 'action'
       formData = form.serialize()
 
-      $.get url, formData, (html) ->
-        $('#movies').html(html)
+      $.get url + '.json', formData, (data) ->
+        $('#movies').html('')
+        for movie in data
+          $('#movies').append poirot.movie(movie)
         $('#spinner').hide()
