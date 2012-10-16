@@ -1,6 +1,6 @@
 class MoviesController < ApplicationController
 
-  respond_to :html, :json
+  respond_to :js, :html, :json
 
   # GET /movies
   # GET /movies.json
