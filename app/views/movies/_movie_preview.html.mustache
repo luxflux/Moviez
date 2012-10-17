@@ -1,0 +1,13 @@
+<div class="accordion-group">
+  <div class="accordion-heading">
+    <a class="accordion-toggle" data-toggle="collapse" data-parent="#movie_preview" href="#preview-{{moviePreview.id}}">
+      {{moviePreview.title}}
+      {{#moviePreview.tagline}}- {{moviePreview.tagline}}{{/moviePreview.tagline}}
+      ({{moviePreview.year}})</a>
+  </div>
+  <div id="preview-{{moviePreview.id}}" class="accordion-body collapse">
+    <div class="accordion-inner">
+      {{moviePreview.overview}}
+    </div>
+  </div>
+</div>

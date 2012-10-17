@@ -6,7 +6,7 @@ jQuery ->
     replace_target = $('#' + $(input).data('observe-target'))
 
     $(input).observe_field observe_timer, ->
-      $("#spinner").show()
+      $('#spinner').show()
       form = $(this).parents 'form'
       url = form.attr 'action'
       formData = form.serialize()
@@ -17,6 +17,7 @@ jQuery ->
         for element in data
           elements = {}
           elements[element_name] = element
+          console.log element
           replace_target.append poirot[element_name](elements)
 
         $('#spinner').hide()
