@@ -1,19 +1,8 @@
-%label{for: 'movie_title', data: {'addclass-error' => 'movie.errors.title.length'}} Title
-%input#movie_title{type: 'text', name: 'movie[title]', data: {bind: 'movie.title', 'addclass-error' => 'movie.errors.title.length'}}
-%small.error{data: {bind: 'converted_errors.title', showif: 'movie.errors.title.length'}}
-
+= f.input :title
 .row
   .four.columns
-    %label{for: 'movie_disc_number', data: {'addclass-error' => 'converted_errors.disc_number.length'}} Disc Number
-    %input#movie_disc_number{type: 'number', name: 'movie[disc_number]', data: {bind: 'movie.disc_number'}}
-    %small.error{data: {bind: 'converted_errors.disc_number', showif: 'movie.errors.disc_number.length'}}
+    = f.input :disc_number
   .eight.columns
-    %label{for: 'movie_watched', data: {'addclass-error' => 'movie.errors.watched.length'}} Watched?
-    %input#movie_watched{type: 'checkbox', name: 'movie[watched]', data: {bind: 'movie.watched'}}
-    %small.error{data: {bind: 'converted_errors.watched', showif: 'movie.errors.watched.length'}}
+    = f.input :watched
+= f.button :submit
 
-#label{for: 'movie_description', data: {'addclass-error' => 'movie.errors.description.length'}} Description
-%textarea#movie_description{name: 'description', name: 'movie[description]', data: {bind: 'movie.description'}}
-%small.error{data: {bind: 'converted_errors.description', showif: 'movie.errors.description.length'}}
-
-%input.button.primary{type: 'submit', name: 'commit'}
