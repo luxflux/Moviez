@@ -16,14 +16,13 @@
             %li= link_to 'About', '/about'
 
   .container
-    .row-fluid
+    .row
       .span12
         - [:alert, :success, :info].each do |msg_type|
           .alert-box{class: msg_type}
             %a.close{href: '#'} &times
             %span= flash[msg_type]
 
-  .container
-    .row-fluid
+    .row
       .span12
         = yield

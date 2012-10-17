@@ -1,6 +1,6 @@
-%h2  Movies in the database
+%h1  Movies in the database
 
-.row-fluid
+.row
   .span10
     = form_tag movies_path, method: :get do
       = text_field_tag :query, params[:query], placeholder: 'Filter movies', autofocus: 'autofocus', 'data-observe-multiple' => :movie, 'data-observe-target' => :movies
