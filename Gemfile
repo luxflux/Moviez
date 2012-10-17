@@ -16,7 +16,8 @@ gem 'haml'
 gem 'haml-rails'
 gem 'simple_form'
 gem 'pg_search'
-gem 'poirot'
+gem 'stache'
+gem 'mustache'
 gem 'draper'
 
 group :development do
