@@ -1,4 +1,6 @@
-%h1  Movies in the database
+- model_class = Movie
+.page-header
+  %h1=t '.title', :default => model_class.model_name.human.pluralize
 
 .row
   .span10
