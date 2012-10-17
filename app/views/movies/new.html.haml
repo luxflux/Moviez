@@ -2,6 +2,11 @@
 .page-header
   %h1=t '.title', :default => t('helpers.titles.new', :model => model_class.model_name.human, :default => "New #{model_class.model_name.human}")
 
+
+%h2 Search for a movie
 = render partial: 'tmdb_movie_search/form'
 
-= render partial: 'form'
+.row
+  .span12
+    %h2 New Movie
+    = render partial: 'form'

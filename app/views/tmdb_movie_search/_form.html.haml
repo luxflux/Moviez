@@ -1,10 +1,14 @@
-#spinner.hide
-  .progress.progress-striped.active
-    .bar{style: 'width: 100%'} Loading movies
-
-= form_tag tmdb_movie_search_create_path, method: :get do
-  = text_field_tag :title, params[:title], placeholder: 'Movie title', autocomplete: 'off', 'data-observe-multiple' => :moviePreview, 'data-observe-target' => :movie_search
-
 = template_include_tag 'movie_preview'
-#movie_search.accordion
+
+.row-fluid
+  .span3
+    = form_tag tmdb_movie_search_create_path, method: :get do
+      = text_field_tag :title, params[:title], placeholder: 'Movie title', autocomplete: 'off', 'data-observe-multiple' => :moviePreview, 'data-observe-target' => :movie_search
+
+  .span9
+    #spinner.hide
+      .progress.progress-striped.active
+        .bar{style: 'width: 100%'} Searching for movies
+
+    #movie_search.accordion
 

@@ -17,7 +17,6 @@ jQuery ->
         for element in data
           elements = {}
           elements[element_name] = element
-          console.log element
           replace_target.append poirot[element_name](elements)
 
         $('#spinner').hide()
