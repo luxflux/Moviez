@@ -6,22 +6,24 @@
   = csrf_meta_tags
   %meta{name: 'viewport', content: 'width=device-width, initial-scale=1.0'}
 %body
-.container
-  .row
-    .twelve.columns
-      %ul.nav-bar.top-bar
-        %li= link_to 'Moviezzz', movies_path
-        %li= link_to 'About', '/about'
+  .navbar.navbar-inverse.navbar-fixed-top
+    .navbar-inner
+      .container
+        = link_to 'Moviezzz', root_path, class: 'brand'
+        .nav-collapse.collapse
+          %ul.nav
+            %li= link_to 'All movies', movies_path
+            %li= link_to 'About', '/about'
 
-.container
-  .row
-    .twelve.columns
-      - [:alert, :success, :info].each do |msg_type|
-        .alert-box{class: msg_type}
-          %a.close{href: '#'} &times
-          %span= flash[msg_type]
+  .container
+    .row-fluid
+      .span12
+        - [:alert, :success, :info].each do |msg_type|
+          .alert-box{class: msg_type}
+            %a.close{href: '#'} &times
+            %span= flash[msg_type]
 
-.container
-  .row
-    .twelve.columns
-      = yield
+  .container
+    .row-fluid
+      .span12
+        = yield
