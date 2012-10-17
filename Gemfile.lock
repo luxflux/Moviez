@@ -150,7 +150,7 @@ GEM
       activesupport (>= 3.0)
       railties (>= 3.0)
       rspec (~> 2.11.0)
-    ruby-tmdb (0.2.1)
+    ruby-tmdb3 (0.3.3)
       addressable
       deepopenstruct (>= 0.1.2)
       json
@@ -216,7 +216,7 @@ DEPENDENCIES
   rails (= 3.2.8)
   rb-fsevent
   rspec-rails
-  ruby-tmdb
+  ruby-tmdb3
   simple_form
   terminal-notifier-guard
   twitter-bootswatch-rails

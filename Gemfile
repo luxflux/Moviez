@@ -20,7 +20,7 @@ gem 'pg_search'
 gem 'poirot'
 gem 'draper'
 gem 'twitter-bootswatch-rails-helpers'
-gem 'ruby-tmdb'
+gem 'ruby-tmdb3'
 
 group :development do
   gem 'rspec-rails'
