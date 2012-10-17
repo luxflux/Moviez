@@ -5,8 +5,6 @@ jQuery ->
     observe_timer = $(input).data('observe-timer') || 2
     replace_target = $('#' + $(input).data('observe-target'))
 
-    console.log element_name, observe_timer, replace_target
-
     $(input).observe_field observe_timer, ->
       $("#spinner").show()
       form = $(this).parents 'form'
