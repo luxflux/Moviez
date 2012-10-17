@@ -18,8 +18,26 @@
 
 
   %body
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container
+          = link_to 'Moviezzz', root_path, class: 'brand'
+          .nav-collapse.collapse
+            %ul.nav
+              %li= link_to 'All movies', movies_path
+              %li= link_to 'About', '/about'
 
-    = yield
+  .container
+    .row
+      .span12
+        - [:alert, :success, :info].each do |msg_type|
+          .alert-box{class: msg_type}
+            %a.close{href: '#'} &times
+            %span= flash[msg_type]
+
+    .row
+      .span12
+        = yield
 
     /
       Javascripts
