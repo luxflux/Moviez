@@ -21,6 +21,7 @@ gem 'poirot'
 gem 'draper'
 gem 'twitter-bootswatch-rails-helpers'
 gem 'ruby-tmdb3'
+gem 'wicked'
 
 group :development do
   gem 'rspec-rails'
@@ -32,4 +33,5 @@ group :development do
   gem 'guard-rails'
   gem 'rb-fsevent'
   gem 'powder'
+  gem 'sextant'
 end
