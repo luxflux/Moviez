@@ -11,7 +11,7 @@ jQuery ->
       url = form.attr 'action'
       formData = form.serialize()
 
-      $.get url + '.json', formData, (data) ->
+      $.ajax url + '.json', type: form.attr('method'), data: formData, success: (data) ->
         replace_target.html('')
 
         for element in data
