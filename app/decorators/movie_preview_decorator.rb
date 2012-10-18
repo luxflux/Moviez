@@ -1,13 +1,29 @@
 class MoviePreviewDecorator < Draper::Base
 
-  allows :id, :title, :tagline, :overview, :release_date
-
-  def image
-    'http://www.placehold.it/100x150'
-  end
+  allows :id, :title, :tagline, :overview, :release_date, :imdb_id
 
   def year
     Date.parse(release_date).year rescue 'unknown'
+  end
+
+  def cover_url
+    model.posters.first.sizes.w154.url
+  end
+
+  def length
+    model.runtime
+  end
+
+  def languages
+    model.spoken_languages.collect { |lang| lang.name }.to_sentence
+  end
+
+  def genres
+    model.genres.collect { |genre| genre.name }.to_sentence
+  end
+
+  def cast
+    model.cast[0..3].collect { |cast| "#{cast.name} (#{cast.character})" }.to_sentence
   end
 
   def as_json(options = {})
@@ -16,8 +32,13 @@ class MoviePreviewDecorator < Draper::Base
       title: title,
       tagline: tagline,
       overview: overview,
-      image: image,
       year: year,
+      cover_url: cover_url,
+      length: length,
+      languages: languages,
+      genres: genres,
+      cast: cast,
+      imdb_id: imdb_id
     }
   end
 

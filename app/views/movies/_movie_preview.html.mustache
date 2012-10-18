@@ -14,7 +14,7 @@
               {{#moviePreview.tagline}}
               <span class="lead">{{moviePreview.tagline}}</span>
               {{/moviePreview.tagline}}
-              {{moviePreview.overview}}
+              <p>{{moviePreview.overview}}</p>
             </div>
           </div>
           <div class="row-fluid">
@@ -29,11 +29,11 @@
           </div>
           <div class="row-fluid">
             <div class="span3"><strong>Cast</strong></div>
-            <div class="span9">{{moviePreview.cast}}<div>
+            <div class="span9">{{moviePreview.cast}}</div>
           </div>
           <div class="row-fluid">
             <div class="span12">
-              <a href="http://imdb.com/title/{{moviePreview.imdb_id}}/" class="btn btn-primary">Show on IMDB</a>
+              <a href="http://imdb.com/title/{{moviePreview.imdb_id}}/" class="btn btn-primary" target="_blank">Show on IMDB</a>
               <a href="#select" class="btn btn-primary">Select</a>
             </div>
           </div>
