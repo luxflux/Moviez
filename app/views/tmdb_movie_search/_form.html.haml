@@ -2,7 +2,7 @@
 
 .row-fluid
   .span3
-    = form_tag tmdb_movie_search_path do
+    = form_tag tmdb_movie_search_index_path do
       = text_field_tag :title, params[:title], placeholder: 'Movie title', autocomplete: 'off', 'data-observe-multiple' => :moviePreview, 'data-observe-target' => :movie_search
 
   .span9

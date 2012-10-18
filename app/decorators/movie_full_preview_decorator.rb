@@ -1,10 +1,6 @@
-class MoviePreviewDecorator < Draper::Base
+class MovieFullPreviewDecorator < Draper::Base
 
-  allows :id, :title, :tagline, :overview, :release_date, :imdb_id
-
-  def year
-    Date.parse(release_date).year rescue 'unknown'
-  end
+  allows :id, :title, :tagline, :overview, :imdb_id
 
   def cover_url
     model.posters.first.sizes.w154.url

@@ -1,6 +1,6 @@
 Moviez::Application.routes.draw do
 
-  resource :tmdb_movie_search, only: :create
+  resources :tmdb_movie_search, only: [:show, :create]
 
   resources :movies
 
