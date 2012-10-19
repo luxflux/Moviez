@@ -6,10 +6,10 @@ jQuery ->
 
     return unless id and target
 
-    element.children('.spinner').show()
+    element.children('.accordion-inner').children('.spinner').show()
 
     $.get target, (data) ->
       console.log data
-      element.html(poirot.moviePreview(data))
-      element.children('.spinner').hide()
+      element.children('.accordion-inner').append(poirot.moviePreview(data))
+      element.children('.accordion-inner').children('.spinner').hide()
 
