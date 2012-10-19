@@ -1,13 +1,15 @@
 jQuery ->
   $('.accordion-body').live 'show', ->
-    console.log this
-    id = $(this).data('accordion-id')
-    target = $(this).data('accordion-href')
+    element = $(this)
+    id = element.data('accordion-id')
+    target = element.data('accordion-href')
 
     return unless id and target
 
+    element.children('.spinner').show()
+
     $.get target, (data) ->
-      $(this).children('spinner').show()
-      $(this).html('done')
-      $(this).children('spinner').hide()
+      console.log data
+      element.html(poirot.moviePreview(data))
+      element.children('.spinner').hide()
 
