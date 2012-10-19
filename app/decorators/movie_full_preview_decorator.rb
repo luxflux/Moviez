@@ -1,4 +1,4 @@
-class MovieFullPreviewDecorator < Draper::Base
+class MovieFullPreviewDecorator < MovieShortPreviewDecorator
 
   allows :id, :title, :tagline, :overview, :imdb_id
 
