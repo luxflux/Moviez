@@ -1,2 +1,2 @@
-web: bundle exec unicorn_rails -p 1800
+web: bundle exec unicorn_rails -p $PORT
 
