@@ -1,5 +1,5 @@
 jQuery ->
-  $('.accordion-body').on 'show', ->
+  $('.accordion-body').live 'show', ->
     console.log this
     id = $(this).data('accordion-id')
     target = $(this).data('accordion-href')
