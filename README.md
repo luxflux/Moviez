@@ -1,3 +1,3 @@
 # Moviez
 
-Rails app with EmberJS to manage my dvd collection (and giving ember a try).
+Rails app to manage my dvd collection. Uses http://tmdb.org as backend for gathering movie informations.
