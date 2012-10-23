@@ -16,4 +16,8 @@ class Movie < ActiveRecord::Base
     end
   end
 
+  def load_attributes_from_tmdb_data
+    self
+  end
+
 end
