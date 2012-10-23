@@ -28,8 +28,6 @@ group :development do
   gem 'factory_girl_rails'
   gem 'guard'
   gem 'terminal-notifier-guard'
-  gem 'guard-rspec'
-  gem 'guard-rails'
   gem 'rb-fsevent'
   gem 'guard-zeus'
   gem 'powder'
