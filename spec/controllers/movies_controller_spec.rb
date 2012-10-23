@@ -24,7 +24,7 @@ describe MoviesController do
   # Movie. As you add validations to Movie, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {}
+    FactoryGirl.attributes_for(:movie)
   end
 
   # This should return the minimal set of values that should be in the session

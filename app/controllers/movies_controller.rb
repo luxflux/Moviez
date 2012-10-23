@@ -42,6 +42,8 @@ class MoviesController < ApplicationController
   # PUT /movies/1.json
   def update
     @movie = Movie.find(params[:id])
+    @movie.update_attributes(params[:movie])
+    @movie.save
     respond_with @movie
   end
 
