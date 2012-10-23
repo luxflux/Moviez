@@ -1,4 +1,7 @@
 class Movie < ActiveRecord::Base
+
+  TMDB_FIELDS = [:title, :imdb_id]
+
   attr_accessible :description, :disc_number, :title, :watched
 
   validates :title, presence: true
@@ -16,8 +19,10 @@ class Movie < ActiveRecord::Base
     end
   end
 
-  def load_attributes_from_tmdb_data
-    self
+  def load_attributes_from_tmdb_data(tmdb_data)
+    TMDB_FIELDS.each do |attr|
+      self.send("#{attr}=", tmdb_data.send(attr))
+    end
   end
 
 end
