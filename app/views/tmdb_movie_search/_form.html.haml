@@ -11,5 +11,6 @@
       .progress.progress-striped.active
         .bar{style: 'width: 100%'} Searching for movies
 
-    #movie_search.accordion
+    = form_for Movie.new do
+      #movie_search.accordion
 
