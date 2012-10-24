@@ -28,6 +28,7 @@ group :development do
   gem 'factory_girl_rails'
   gem 'guard'
   gem 'guard-rspec'
+  gem 'awesome_print'
   gem 'terminal-notifier-guard'
   gem 'rb-fsevent', require: false
   gem 'powder'
