@@ -27,9 +27,10 @@ group :development do
   gem 'capybara'
   gem 'factory_girl_rails'
   gem 'guard'
+  gem 'guard-rspec', git: 'https://github.com/guard/guard-rspec.git'
   gem 'terminal-notifier-guard'
-  gem 'rb-fsevent'
-  gem 'guard-zeus'
+  gem 'rb-fsevent', require: false
   gem 'powder'
   gem 'sextant'
+  gem 'zeus'
 end
