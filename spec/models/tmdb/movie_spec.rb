@@ -12,31 +12,7 @@ describe TMDB::Movie do
 
   describe "#new" do
 
-    let(:tmdb_data) do
-      OpenStruct.new({
-        imdb_id: 't123',
-        cast: tmdb_data_cast
-      })
-    end
-
-    let(:tmdb_data_cast) do
-      [OpenStruct.new({
-        id: 524,
-        name: 'Natalie Portman',
-        character: 'Queen Amidala',
-        order: 0,
-        cast_id: 6,
-        profile_path: '/cWHfFaRj82mkl1Hqi2qrZn3VqEi.jpg'
-      }),
-      OpenStruct.new({
-        id: 3061,
-        name: 'Ewan McGregor',
-        character: 'Obi Wan Kenobi',
-        order: 1,
-        cast_id: 7,
-        profile_path: '/jL2FaPXJVe271LKYaj3ddFTeQ5O.jpg'
-      })]
-    end
+    let(:tmdb_data) { tmdb_result }
 
     it 'fills in its attributes with the given data' do
       TMDB::Movie.new(tmdb_data).imdb_id.should eq(tmdb_data.imdb_id)

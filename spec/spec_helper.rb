@@ -27,11 +27,36 @@ RSpec.configure do |config|
   # If true, the base class of anonymous controllers will be inferred
   # automatically. This will be the default behavior in future versions of
   # rspec-rails.
-  config.infer_base_class_for_anonymous_controllers = false
+  config.infer_base_class_for_anonymous_controllers = true
 
   # Run specs in random order to surface order dependencies. If you find an
   # order dependency and want to debug it, you can fix the order by providing
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = "random"
+end
+
+def tmdb_result
+  TMDB::Movie.new(
+    OpenStruct.new(
+      id: 1,
+      imdb_id: 't123',
+      cast: [OpenStruct.new({
+          id: 524,
+          name: 'Natalie Portman',
+          character: 'Queen Amidala',
+          order: 0,
+          cast_id: 6,
+          profile_path: '/cWHfFaRj82mkl1Hqi2qrZn3VqEi.jpg'
+        }),
+        OpenStruct.new({
+          id: 3061,
+          name: 'Ewan McGregor',
+          character: 'Obi Wan Kenobi',
+          order: 1,
+          cast_id: 7,
+          profile_path: '/jL2FaPXJVe271LKYaj3ddFTeQ5O.jpg'
+        })]
+    )
+  )
 end

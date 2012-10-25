@@ -3,7 +3,7 @@ class TMDBMovieSearchController < ApplicationController
   respond_to :json
 
   def show
-    @movie = MovieFullPreviewDecorator.decorate(MovieShortPreviewDecorator.decorate(TmdbMovie.find(id: params[:id], expand_results: true)))
+    @movie = MovieFullPreviewDecorator.decorate(MovieShortPreviewDecorator.decorate(TMDB::Movie.find_by_id(params[:id])))
     render json: @movie
   end
 

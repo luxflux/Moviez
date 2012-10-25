@@ -3,16 +3,11 @@ require 'ostruct'
 
 describe TMDBMovieSearchController do
 
-  let(:data_from_tmdb) do
-    OpenStruct.new(
-      id: 1,
-      imdb_id: 't123',
-    )
-  end
+  let(:tmdb_movie) { tmdb_result }
 
   describe "GET 'show'" do
     it "returns http success" do
-      TMDB::Movie.should_receive(:find_by_id).with("1").returns(data_from_tmdb)
+      TMDB::Movie.should_receive(:find_by_id).with("1").and_return(tmdb_movie)
       get 'show', id: 1
       response.should be_success
     end
