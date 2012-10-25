@@ -6,7 +6,7 @@ class TMDB::Movie
 
 
   attr_accessor *ATTRIBUTE_MAPPING.map { |key,value| key }
-  attr_accessor :actors
+  attr_accessor :cast
 
 
   def initialize(tmdb_data)
@@ -23,7 +23,7 @@ class TMDB::Movie
   private
   def load_from_data
     load_attributes
-    load_actors
+    load_cast
   end
 
   def load_attributes
@@ -33,8 +33,8 @@ class TMDB::Movie
     end
   end
 
-  def load_actors
-    self.actors = @raw.actors
+  def load_cast
+    self.cast = @raw.cast
   end
 
 end
