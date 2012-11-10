@@ -5,7 +5,7 @@ describe TMDB::Movie do
   describe "#find_by_id" do
 
     it 'searches with extended results' do
-      TmdbMovie.should_receive(:find).with(id: 1, expand_results: true)
+      TmdbMovie.should_receive(:find).with(id: 1, expand_results: true).and_return(tmdb_result)
       TMDB::Movie.find_by_id(1).should be_instance_of(TMDB::Movie)
     end
   end
