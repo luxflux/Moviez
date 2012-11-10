@@ -13,9 +13,10 @@ describe TMDBMovieSearchController do
     end
   end
 
-  describe "GET 'create'" do
+  describe "POST 'create'" do
     it "returns http success" do
-      get 'create'
+      TMDB::Movie.should_receive(:search).with(title: 'Star Wars').and_return([tmdb_movie, tmdb_movie])
+      post 'create', title: 'Star Wars'
       response.should be_success
     end
   end
