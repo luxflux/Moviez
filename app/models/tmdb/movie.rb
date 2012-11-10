@@ -7,6 +7,7 @@ class TMDB::Movie
     :imdb_id,
     :tagline,
     :runtime,
+    :overview
   ]
 
 
