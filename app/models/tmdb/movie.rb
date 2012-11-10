@@ -25,6 +25,13 @@ class TMDB::Movie
     self.new TmdbMovie.find(id: id, expand_results: true)
   end
 
+  def self.search(search_parameters)
+    search_parameters.merge!(expand_results: false)
+    TmdbMovie.find(search_parameters).map do |result|
+      self.new result
+    end
+  end
+
 
   private
   def load_from_data

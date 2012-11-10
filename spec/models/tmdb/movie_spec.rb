@@ -10,6 +10,15 @@ describe TMDB::Movie do
     end
   end
 
+  describe "#search" do
+
+    it 'searches with the given attributes' do
+      TmdbMovie.should_receive(:find).with(title: 'Star Wars', expand_results: false).and_return([tmdb_result, tmdb_result])
+      TMDB::Movie.search(title: 'Star Wars').should be_instance_of(Array)
+    end
+
+  end
+
   describe "#new" do
 
     let(:tmdb_data) { tmdb_result }
