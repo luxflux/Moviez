@@ -41,6 +41,8 @@ def tmdb_result
     OpenStruct.new(
       id: 1,
       imdb_id: 't123',
+      release_date: '01-01-1988',
+      title: 'Star Wars Episode VII',
       cast: [OpenStruct.new({
           id: 524,
           name: 'Natalie Portman',

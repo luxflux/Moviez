@@ -1,7 +1,10 @@
 class TMDB::Movie
 
   ATTRIBUTE_MAPPING = {
-    imdb_id: :imdb_id
+    id: :id,
+    title: :title,
+    release_date: :release_date,
+    imdb_id: :imdb_id,
   }
 
 
