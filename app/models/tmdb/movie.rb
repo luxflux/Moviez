@@ -1,15 +1,17 @@
 class TMDB::Movie
 
-  ATTRIBUTE_MAPPING = {
-    id: :id,
-    title: :title,
-    release_date: :release_date,
-    imdb_id: :imdb_id,
-  }
+  ATTRIBUTES = [
+    :id,
+    :title,
+    :release_date,
+    :imdb_id,
+    :tagline,
+    :runtime,
+  ]
 
 
-  attr_accessor *ATTRIBUTE_MAPPING.map { |key,value| key }
-  attr_accessor :cast
+  attr_accessor *ATTRIBUTES
+  attr_accessor :cast, :spoken_languages, :posters, :genres
 
 
   def initialize(tmdb_data)
@@ -27,17 +29,32 @@ class TMDB::Movie
   def load_from_data
     load_attributes
     load_cast
+    load_spoken_languages
+    load_posters
+    load_genres
   end
 
   def load_attributes
-    ATTRIBUTE_MAPPING.each do |local_key, tmdb_key|
-      tmdb_value = @raw.send(tmdb_key)
-      self.send("#{local_key}=", tmdb_value)
+    ATTRIBUTES.each do |name|
+      tmdb_value = @raw.send(name)
+      self.send("#{name}=", tmdb_value)
     end
   end
 
   def load_cast
     self.cast = @raw.cast
+  end
+
+  def load_spoken_languages
+    self.spoken_languages = @raw.spoken_languages
+  end
+
+  def load_posters
+    self.posters = @raw.posters
+  end
+
+  def load_genres
+    self.genres = @raw.genres
   end
 
 end
