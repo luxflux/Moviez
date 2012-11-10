@@ -37,31 +37,32 @@ RSpec.configure do |config|
 end
 
 def tmdb_result
-  TMDB::Movie.new(
-    OpenStruct.new(
-      id: 1,
-      imdb_id: 't123',
-      release_date: '01-01-1988',
-      title: 'Star Wars Episode VII',
-      tagline: 'Not so much words',
-      overview: 'A lot more words!',
-      runtime: 144,
+  OpenStruct.new(
+    id: 1,
+    imdb_id: 't123',
+    release_date: '01-01-1988',
+    title: 'Star Wars Episode VII',
+    tagline: 'Not so much words',
+    overview: 'A lot more words!',
+    runtime: 144,
 
-      posters: [OpenStruct.new(
+    posters: [
+      OpenStruct.new(
         sizes: OpenStruct.new(
           w154: OpenStruct.new(url: 'http://tmdb.org/nice_pic.png')
         )
-      )],
+      )
+    ],
 
-      cast: [
-        OpenStruct.new(
-          id: 524,
-          name: 'Natalie Portman',
-          character: 'Queen Amidala',
-          order: 0,
-          cast_id: 6,
-          profile_path: '/cWHfFaRj82mkl1Hqi2qrZn3VqEi.jpg'
-        ),
+    cast: [
+      OpenStruct.new(
+        id: 524,
+        name: 'Natalie Portman',
+        character: 'Queen Amidala',
+        order: 0,
+        cast_id: 6,
+        profile_path: '/cWHfFaRj82mkl1Hqi2qrZn3VqEi.jpg'
+      ),
         OpenStruct.new(
           id: 3061,
           name: 'Ewan McGregor',
@@ -69,19 +70,18 @@ def tmdb_result
           order: 1,
           cast_id: 7,
           profile_path: '/jL2FaPXJVe271LKYaj3ddFTeQ5O.jpg'
-        )
-      ],
+      )
+    ],
 
-      spoken_languages: [
-        OpenStruct.new(name: 'English'),
-        OpenStruct.new(name: 'German'),
-        OpenStruct.new(name: 'Spanish')
-      ],
+    spoken_languages: [
+      OpenStruct.new(name: 'English'),
+      OpenStruct.new(name: 'German'),
+      OpenStruct.new(name: 'Spanish')
+    ],
 
-      genres: [
-        OpenStruct.new(name: 'Science-Fiction'),
-        OpenStruct.new(name: 'Action')
-      ]
-    )
+    genres: [
+      OpenStruct.new(name: 'Science-Fiction'),
+      OpenStruct.new(name: 'Action')
+    ]
   )
 end

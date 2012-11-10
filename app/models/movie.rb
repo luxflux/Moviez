@@ -21,8 +21,10 @@ class Movie < ActiveRecord::Base
 
   def load_attributes_from_tmdb_data(tmdb_data)
     TMDB_FIELDS.each do |attr|
-      self.send("#{attr}=", tmdb_data.send(attr))
+      tmdb_value = tmdb_data.send(attr)
+      send("#{attr}=", tmdb_value)
     end
+    self
   end
 
 end

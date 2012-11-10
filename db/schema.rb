@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120908171706) do
+ActiveRecord::Schema.define(:version => 20121110133600) do
 
   create_table "movies", :force => true do |t|
     t.string   "title"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(:version => 20120908171706) do
     t.boolean  "watched"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.string   "imdb_id"
   end
 
   add_index "movies", ["disc_number"], :name => "index_movies_on_disc_number", :unique => true
