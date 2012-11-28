@@ -69,7 +69,7 @@ describe MoviesController do
     describe "with valid params" do
       it "creates a new Movie" do
         expect {
-          post :create, {:movie => valid_attributes}, valid_session
+          post :create, {:movie => {:tmdb_id => 1337}}, valid_session
         }.to change(Movie, :count).by(1)
       end
 

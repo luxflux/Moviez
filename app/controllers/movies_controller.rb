@@ -32,7 +32,7 @@ class MoviesController < ApplicationController
   # POST /movies.json
   def create
     @movie = Movie.new
-    tmdb_data = TmdbMovie.find(id: params[:movie][:tmdb_id], expand_results: true)
+    tmdb_data = TMDB::Movie.find_by_id(params[:movie][:tmdb_id])
     @movie.load_attributes_from_tmdb_data(tmdb_data)
     @movie.save
     respond_with @movie
