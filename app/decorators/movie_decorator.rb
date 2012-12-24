@@ -1,7 +1,7 @@
 class MovieDecorator < Draper::Base
   decorates :movie
 
-  allows :id, :title, :disc_number, :watched, :description
+  allows :id, :title, :disc_number, :watched, :overview
 
   def image
     'http://www.placehold.it/100x150'
@@ -17,7 +17,7 @@ class MovieDecorator < Draper::Base
       title: title,
       disc_number: disc_number,
       watched: watched,
-      description: description,
+      overview: overview,
       image: image,
       url: url
     }

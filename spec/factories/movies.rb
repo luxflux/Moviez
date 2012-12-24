@@ -6,6 +6,5 @@ FactoryGirl.define do
     overview "Long text"
     tagline 'Short text'
     disc_number 1
-    watched false
   end
 end
