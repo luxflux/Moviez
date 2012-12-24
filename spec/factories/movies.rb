@@ -3,7 +3,8 @@
 FactoryGirl.define do
   factory :movie do
     title "MyString"
-    description "MyText"
+    overview "Long text"
+    tagline 'Short text'
     disc_number 1
     watched false
   end

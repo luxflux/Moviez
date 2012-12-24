@@ -2,7 +2,7 @@ class Movie < ActiveRecord::Base
 
   TMDB_FIELDS = [:title, :imdb_id, :overview, :tagline]
 
-  attr_accessible :overview, :disc_number, :title, :watched
+  attr_accessible :overview, :disc_number, :title, :watched, :tagline
 
   validates :title, :overview, presence: true
   validates :disc_number, numericality: { only_integer: true }, allow_nil: true
