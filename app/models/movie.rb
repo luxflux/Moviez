@@ -21,16 +21,25 @@ class Movie < ActiveRecord::Base
   end
 
   def load_attributes_from_tmdb_data(tmdb_data)
-    TMDB_FIELDS.each do |attr|
-      tmdb_value = tmdb_data.send(attr)
-      send("#{attr}=", tmdb_value)
-    end
+    load_direct_mappings_from_tmdb_data(tmdb_data)
+    load_image_url_from_tmbd_data(tmdb_data)
     self
   end
 
   def set_default_for_watched
     self.watched = false if self.watched.nil?
     true
+  end
+
+  def load_direct_mappings_from_tmdb_data(tmdb_data)
+    TMDB_FIELDS.each do |attr|
+      tmdb_value = tmdb_data.send(attr)
+      send("#{attr}=", tmdb_value)
+    end
+  end
+
+  def load_image_url_from_tmbd_data(tmdb_data)
+    self.image_url = tmdb_data.posters.first.sizes.w154.url
   end
 
 end

@@ -4,7 +4,11 @@ class MovieDecorator < Draper::Base
   allows :id, :title, :disc_number, :watched, :overview
 
   def image
-    'http://www.placehold.it/100x150'
+    if movie.image_url
+      movie.image_url
+    else
+      'http://www.placehold.it/100x150'
+    end
   end
 
   def url

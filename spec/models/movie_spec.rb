@@ -27,6 +27,8 @@ describe Movie do
     its(:tagline) { should eq(tmdb_data.tagline) }
     its(:tagline) { should_not be_nil }
 
+    its(:image_url) { should eq(tmdb_data.posters.first.sizes.w154.url) }
+
   end
 
   describe "#watched" do
