@@ -68,34 +68,40 @@ describe MoviesController do
   describe "POST create" do
     describe "with valid params" do
       it "creates a new Movie" do
+        TMDB::Movie.should_receive(:find_by_id).and_return(tmdb_result)
         expect {
           post :create, {:movie => {:tmdb_id => 1337}}, valid_session
         }.to change(Movie, :count).by(1)
       end
 
       it "assigns a newly created movie as @movie" do
+        TMDB::Movie.should_receive(:find_by_id).and_return(tmdb_result)
         post :create, {:movie => valid_attributes}, valid_session
         assigns(:movie).should be_a(Movie)
         assigns(:movie).should be_persisted
       end
 
       it "redirects to the created movie" do
+        TMDB::Movie.should_receive(:find_by_id).and_return(tmdb_result)
         post :create, {:movie => valid_attributes}, valid_session
         response.should redirect_to(Movie.last)
       end
     end
 
     describe "with invalid params" do
+      let(:invalid_tmdb_result) do
+        result = tmdb_result
+        result.overview = nil
+        result
+      end
       it "assigns a newly created but unsaved movie as @movie" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Movie.any_instance.stub(:save).and_return(false)
+        TMDB::Movie.stub(:find_by_id).and_return(invalid_tmdb_result)
         post :create, {:movie => {}}, valid_session
         assigns(:movie).should be_a_new(Movie)
       end
 
       it "re-renders the 'new' template" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Movie.any_instance.stub(:save).and_return(false)
+        TMDB::Movie.stub(:find_by_id).and_return(invalid_tmdb_result)
         post :create, {:movie => {}}, valid_session
         response.should render_template("new")
       end
@@ -130,17 +136,13 @@ describe MoviesController do
     describe "with invalid params" do
       it "assigns the movie as @movie" do
         movie = Movie.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Movie.any_instance.stub(:save).and_return(false)
-        put :update, {:id => movie.to_param, :movie => {}}, valid_session
+        put :update, {:id => movie.to_param, :movie => {overview: nil}}, valid_session
         assigns(:movie).should eq(movie)
       end
 
       it "re-renders the 'edit' template" do
         movie = Movie.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Movie.any_instance.stub(:save).and_return(false)
-        put :update, {:id => movie.to_param, :movie => {}}, valid_session
+        put :update, {:id => movie.to_param, :movie => {overview: nil}}, valid_session
         response.should render_template("edit")
       end
     end
