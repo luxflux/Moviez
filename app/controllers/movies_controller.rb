@@ -58,4 +58,13 @@ class MoviesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  # PUT /movies/1/auto_update.json
+  def auto_update
+    @movie = Movie.find(params[:id])
+    tmdb_data = TMDB::Movie.find_by_id(@movie.tmdb_id)
+    @movie.load_attributes_from_tmdb_data(tmdb_data)
+    @movie.save
+    respond_with @movie
+  end
 end

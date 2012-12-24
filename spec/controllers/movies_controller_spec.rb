@@ -163,4 +163,32 @@ describe MoviesController do
     end
   end
 
+  describe "PUT auto_update" do
+    let(:movie) do
+      FactoryGirl.create(:movie)
+    end
+
+    it 'updates the given movie with the data from tmdb' do
+      expect {
+        put :auto_update, {id: movie.id}, valid_session
+      }.to change { movie.reload.tagline }
+    end
+
+    context "as html" do
+      it 'redirects to the movie' do
+        TMDB::Movie.should_receive(:find_by_id).with(movie.id).and_return(tmdb_result)
+        put :auto_update, {id: movie.id}, valid_session
+        response.should redirect_to movie_path(movie)
+      end
+    end
+
+    context "as json" do
+      it 'renders success' do
+        TMDB::Movie.should_receive(:find_by_id).with(movie.id).and_return(tmdb_result)
+        put :auto_update, {id: movie.id, format: :json}
+        response.should be_success
+      end
+    end
+  end
+
 end
