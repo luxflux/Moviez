@@ -29,6 +29,8 @@ describe Movie do
 
     its(:image_url) { should eq(tmdb_data.posters.first.sizes.w154.url) }
 
+    its(:tmdb_id) { should eq tmdb_data.id }
+
   end
 
   describe "#watched" do

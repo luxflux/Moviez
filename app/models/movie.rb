@@ -23,6 +23,7 @@ class Movie < ActiveRecord::Base
   def load_attributes_from_tmdb_data(tmdb_data)
     load_direct_mappings_from_tmdb_data(tmdb_data)
     load_image_url_from_tmbd_data(tmdb_data)
+    load_tmdb_id_from_tmbd_data(tmdb_data)
     self
   end
 
@@ -40,6 +41,10 @@ class Movie < ActiveRecord::Base
 
   def load_image_url_from_tmbd_data(tmdb_data)
     self.image_url = tmdb_data.posters.first.sizes.w154.url
+  end
+
+  def load_tmdb_id_from_tmbd_data(tmdb_data)
+    self.tmdb_id = tmdb_data.id
   end
 
 end
