@@ -1,15 +1,14 @@
 class Movie < ActiveRecord::Base
 
-  TMDB_FIELDS = [:title, :imdb_id]
+  TMDB_FIELDS = [:title, :imdb_id, :overview, :tagline]
 
-  attr_accessible :description, :disc_number, :title, :watched
+  attr_accessible :overview, :disc_number, :title, :watched
 
-  validates :title, presence: true
-  validates :description, presence: true
-  validates :disc_number, presence: true
+  validates :title, :overview, presence: true
+  validates :disc_number, numericality: { only_integer: true }, allow_nil: true
 
   include PgSearch
-  pg_search_scope :search, against: [:title, :description]
+  pg_search_scope :search, against: [:title, :overview]
 
   def self.text_search(query)
     if query.present?

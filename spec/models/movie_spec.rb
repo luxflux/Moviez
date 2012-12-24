@@ -19,7 +19,13 @@ describe Movie do
     it { should be_instance_of(::Movie) }
 
     its(:title) { should eq(tmdb_data.title) }
+    its(:title) { should_not be_nil }
     its(:imdb_id) { should eq(tmdb_data.imdb_id) }
+    its(:imdb_id) { should_not be_nil }
+    its(:overview) { should eq(tmdb_data.overview) }
+    its(:overview) { should_not be_nil }
+    its(:tagline) { should eq(tmdb_data.tagline) }
+    its(:tagline) { should_not be_nil }
 
 
   end
