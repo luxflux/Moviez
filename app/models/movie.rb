@@ -10,6 +10,8 @@ class Movie < ActiveRecord::Base
   include PgSearch
   pg_search_scope :search, against: [:title, :overview]
 
+  before_validation :set_default_for_watched
+
   def self.text_search(query)
     if query.present?
       search query
@@ -24,6 +26,11 @@ class Movie < ActiveRecord::Base
       send("#{attr}=", tmdb_value)
     end
     self
+  end
+
+  def set_default_for_watched
+    self.watched = false if self.watched.nil?
+    true
   end
 
 end

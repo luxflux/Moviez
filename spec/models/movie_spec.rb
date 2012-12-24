@@ -27,7 +27,21 @@ describe Movie do
     its(:tagline) { should eq(tmdb_data.tagline) }
     its(:tagline) { should_not be_nil }
 
+  end
 
+  describe "#watched" do
+    let(:movie) do
+      FactoryGirl.build(:movie)
+    end
+
+    it 'sets the default for watched' do
+      movie.valid?
+      movie.watched.should be_false
+    end
+
+    it 'does not halt the filter chain' do
+      movie.save.should be_true
+    end
   end
 
 end
