@@ -1,6 +1,8 @@
 jQuery ->
   $('.accordion-body').live 'show', ->
     element = $(this)
+    return if element.data('loaded')
+
     id = element.data('accordion-id')
     target = element.data('accordion-href')
 
@@ -9,7 +11,7 @@ jQuery ->
     element.children('.accordion-inner').children('.spinner').show()
 
     $.get target, (data) ->
-      console.log data
+      element.data 'loaded', true
       element.children('.accordion-inner').append(poirot.moviePreview(data))
       element.children('.accordion-inner').children('.spinner').hide()
 
