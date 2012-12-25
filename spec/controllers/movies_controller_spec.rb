@@ -169,6 +169,7 @@ describe MoviesController do
     end
 
     it 'updates the given movie with the data from tmdb' do
+      TMDB::Movie.should_receive(:find_by_id).with(movie.tmdb_id).and_return(tmdb_result)
       expect {
         put :auto_update, {id: movie.id}, valid_session
       }.to change { movie.reload.tagline }
@@ -176,7 +177,7 @@ describe MoviesController do
 
     context "as html" do
       it 'redirects to the movie' do
-        TMDB::Movie.should_receive(:find_by_id).with(movie.id).and_return(tmdb_result)
+        TMDB::Movie.should_receive(:find_by_id).with(movie.tmdb_id).and_return(tmdb_result)
         put :auto_update, {id: movie.id}, valid_session
         response.should redirect_to movie_path(movie)
       end
@@ -184,7 +185,7 @@ describe MoviesController do
 
     context "as json" do
       it 'renders success' do
-        TMDB::Movie.should_receive(:find_by_id).with(movie.id).and_return(tmdb_result)
+        TMDB::Movie.should_receive(:find_by_id).with(movie.tmdb_id).and_return(tmdb_result)
         put :auto_update, {id: movie.id, format: :json}
         response.should be_success
       end
