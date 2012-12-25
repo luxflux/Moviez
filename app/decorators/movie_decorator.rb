@@ -1,7 +1,7 @@
 class MovieDecorator < Draper::Base
   decorates :movie
 
-  allows :id, :title, :disc_number, :watched, :overview
+  allows :id, :title, :disc_number, :watched, :overview, :tagline
 
   def image
     if movie.image_url
@@ -15,6 +15,18 @@ class MovieDecorator < Draper::Base
     h.movie_path movie
   end
 
+  def disc_number
+    movie.disc_number ? movie.disc_number : h.t('movie.disc_number.none')
+  end
+
+  def watched
+    h.t("movie.watched.#{movie.watched?}")
+  end
+
+  def disc_number_and_watched
+    [disc_number, watched.camelize(:lower)].to_sentence
+  end
+
   def as_json(options = {})
     {
       id: id,
@@ -23,7 +35,9 @@ class MovieDecorator < Draper::Base
       watched: watched,
       overview: overview,
       image: image,
-      url: url
+      url: url,
+      tagline: tagline,
+      disc_number_and_watched: disc_number_and_watched
     }
   end
 

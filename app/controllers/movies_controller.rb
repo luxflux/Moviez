@@ -12,7 +12,7 @@ class MoviesController < ApplicationController
   # GET /movies/1
   # GET /movies/1.json
   def show
-    @movie = Movie.find(params[:id])
+    @movie = MovieDecorator.decorate(Movie.find(params[:id]))
     respond_with @movie
   end
 

@@ -2,22 +2,18 @@
 .page-header
   %h1=t '.title', :default => model_class.model_name.human
 
-%p
-  %strong= model_class.human_attribute_name(:title) + ':'
-  %br
-  = @movie.title
-%p
-  %strong= model_class.human_attribute_name(:overview) + ':'
-  %br
-  = @movie.overview
-%p
-  %strong= model_class.human_attribute_name(:disc_number) + ':'
-  %br
-  = @movie.disc_number
-%p
-  %strong= model_class.human_attribute_name(:watched) + ':'
-  %br
-  = @movie.watched
+.row-fluid
+  .span2= image_tag @movie.image
+  .span10
+    %h3
+      = @movie.title
+      %small= @movie.tagline
+    .row-fluid
+      .span2= model_class.human_attribute_name(:disc_number)
+      .span2= @movie.disc_number
+      .span8= @movie.watched
+    .row-fluid
+      .span12= @movie.overview
 
 .form-actions
   = link_to t('.back', :default => t("helpers.links.back")), movies_path, :class => 'btn'
