@@ -5,6 +5,7 @@ FactoryGirl.define do
     title "MyString"
     overview "Long text"
     tagline 'Short text'
+    tmdb_id 1337
     disc_number 1
   end
 end

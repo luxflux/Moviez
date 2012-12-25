@@ -2,10 +2,11 @@ class Movie < ActiveRecord::Base
 
   TMDB_FIELDS = [:title, :imdb_id, :overview, :tagline]
 
-  attr_accessible :overview, :disc_number, :title, :watched, :tagline
+  attr_accessible :overview, :disc_number, :title, :watched, :tagline, :tmdb_id
 
-  validates :title, :overview, presence: true
+  validates :title, :overview, :tmdb_id, presence: true
   validates :disc_number, numericality: { only_integer: true }, allow_nil: true
+  validates :tmdb_id, numericality: { only_integer: true }
 
   include PgSearch
   pg_search_scope :search, against: [:title, :overview]
