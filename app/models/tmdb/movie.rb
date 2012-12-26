@@ -27,8 +27,13 @@ class TMDB::Movie
 
   def self.search(search_parameters)
     search_parameters.merge!(expand_results: false)
-    TmdbMovie.find(search_parameters).map do |result|
-      self.new result
+    search_result = TmdbMovie.find(search_parameters)
+    if search_result.respond_to?(:map)
+      search_result.map do |result|
+        self.new result
+      end
+    else
+      [self.new(search_result)]
     end
   end
 

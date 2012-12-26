@@ -17,6 +17,11 @@ describe TMDB::Movie do
       TMDB::Movie.search(title: 'Star Wars').should be_instance_of(Array)
     end
 
+    it 'handles the returning of just one result' do
+      TmdbMovie.should_receive(:find).with(title: 'Star Wars', expand_results: false).and_return(tmdb_result)
+      TMDB::Movie.search(title: 'Star Wars').should be_instance_of(Array)
+    end
+
   end
 
   describe "#new" do
