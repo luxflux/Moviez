@@ -2,12 +2,12 @@ source "http://bundler-api.herokuapp.com"
 
 gem 'rails', '3.2.8'
 gem 'pg'
+
 group :assets do
-  gem 'less-rails'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
-
-  gem 'twitter-bootswatch-rails'
+  gem 'sass-rails'
+  gem 'bootstrap-sass'
 end
 
 gem 'jquery-rails', '~> 2.0.3'
@@ -19,7 +19,6 @@ gem 'simple_form'
 gem 'pg_search'
 gem 'poirot'
 gem 'draper'
-gem 'twitter-bootswatch-rails-helpers'
 gem 'ruby-tmdb3'
 
 group :development do

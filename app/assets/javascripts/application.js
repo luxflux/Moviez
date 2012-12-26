@@ -12,7 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require bootswatch/loader
+//= require bootstrap
 //= require poirot
 //
 //= require_tree .
