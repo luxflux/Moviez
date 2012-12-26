@@ -2,11 +2,14 @@
 = template_include_tag 'movie_preview'
 
 .row-fluid
-  .span3
+  .span12
     = form_tag tmdb_movie_search_index_path do
       = text_field_tag :title, params[:title], placeholder: 'Movie title', autocomplete: 'off', 'data-observe-multiple' => :moviePreviewTitle, 'data-observe-target' => :movie_search
 
-  .span9
+.row-fluid
+  .span12
+    %h2 Results
+    #placeholder Nothing searched, yet
     #spinner.hide
       .progress.progress-striped.active
         .bar{style: 'width: 100%'} Searching for movies

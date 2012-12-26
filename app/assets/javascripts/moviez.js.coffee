@@ -6,6 +6,7 @@ jQuery ->
     replace_target = $('#' + $(input).data('observe-target'))
 
     $(input).observe_field observe_timer, ->
+      $('#placeholder').hide()
       $('#spinner').show()
       form = $(this).parents 'form'
       url = form.attr 'action'
