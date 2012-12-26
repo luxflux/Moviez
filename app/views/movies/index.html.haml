@@ -1,14 +1,8 @@
-- model_class = Movie
-.page-header
-  %h1=t '.title', :default => model_class.model_name.human.pluralize
-
-.row
-  .span10
-    = form_tag movies_path, method: :get do
-      = text_field_tag :query, params[:query], placeholder: 'Filter movies', autofocus: 'autofocus', 'data-observe-multiple' => :movie, 'data-observe-target' => :movies
-  .span2
-    = link_to 'New Movie', new_movie_path, class: [:btn, 'btn-primary']
+= form_tag movies_path, method: :get, class: 'form-search' do
+  = text_field_tag :query, params[:query], placeholder: 'Filter movies', autofocus: 'autofocus', 'data-observe-multiple' => :movie, 'data-observe-target' => :movies, class: 'search-query input-block-level'
 
 = template_include_tag 'movie'
-#movies
+
+//- @movies.in_groups_of(6, false) do |movies|
+%ul#movies.thumbnails
   = render @movies

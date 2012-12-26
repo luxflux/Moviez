@@ -1,14 +1,5 @@
-<div class="row-fluid">
-  <div class="span2">
-    <img src="{{movie.image}}" alt="{{movie.title}}" />
-  </div>
-  <div class="span10">
-    <h3>
-      <a href="{{movie.url}}">{{movie.title}}</a>
-      <small>
-        <span>{{movie.disc_number_and_watched}}</span>
-      </small>
-    </h3>
-    <span>{{movie.overview}}</span>
-  </div>
-</div>
+<li class="span2">
+  <a href="{{movie.url}}" class="thumbnail">
+    <img src="{{movie.image}}" alt="{{movie.title}}" height="130" />
+  </a>
+</li>
