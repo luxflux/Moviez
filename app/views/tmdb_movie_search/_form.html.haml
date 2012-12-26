@@ -4,7 +4,7 @@
 .row-fluid
   .span12
     = form_tag tmdb_movie_search_index_path do
-      = text_field_tag :title, params[:title], placeholder: 'Movie title', autocomplete: 'off', 'data-observe-multiple' => :moviePreviewTitle, 'data-observe-target' => :movie_search
+      = text_field_tag :title, params[:title], placeholder: 'Movie title', autofocus: 'on', autocomplete: 'off', 'data-observe-multiple' => :moviePreviewTitle, 'data-observe-target' => :movie_search
 
 .row-fluid
   .span12
