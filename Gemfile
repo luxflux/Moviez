@@ -21,6 +21,8 @@ gem 'poirot'
 gem 'draper'
 gem 'ruby-tmdb3'
 
+gem 'airbrake'
+
 group :development do
   gem 'rspec-rails'
   gem 'capybara'
