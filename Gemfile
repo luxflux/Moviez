@@ -35,4 +35,5 @@ group :development do
   gem 'powder'
   gem 'sextant'
   gem 'zeus'
+  gem 'meta_request'
 end
