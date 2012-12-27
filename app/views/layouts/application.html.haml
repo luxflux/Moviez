@@ -17,6 +17,9 @@
     %link(href="images/apple-touch-icon.png" rel="apple-touch-icon-precomposed")
     %link(href="images/favicon.ico" rel="shortcut icon")
 
+    - if ENV['ENABLE_AIRBRAKE']
+      = airbrake_javascript_notifier
+
   %body
     .navbar
       .navbar-inner
