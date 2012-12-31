@@ -9,7 +9,7 @@ class Movie < ActiveRecord::Base
   validates :disc_number, numericality: { only_integer: true }, allow_nil: true
   validates :tmdb_id, numericality: { only_integer: true }
 
-  validates :disc_number, uniqueness: true
+  validates :disc_number, uniqueness: true, allow_nil: true
 
   include PgSearch
   pg_search_scope :search, against: [:title, :overview]
