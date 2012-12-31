@@ -1,2 +1,9 @@
 %h1 Search for a new movie
+
+- if @movie.errors
+  .alert.alert-error
+    %button.close{type: :button, :'data-dismiss' => :alert} &times;
+    %h3 Movie could not be imported
+    = @movie.errors.full_messages.to_sentence
+
 = render partial: 'tmdb_movie_search/form'
