@@ -17,9 +17,6 @@
     %link(href="images/apple-touch-icon.png" rel="apple-touch-icon-precomposed")
     = favicon_link_tag
 
-    - if ENV['ENABLE_AIRBRAKE']
-      = airbrake_javascript_notifier
-
   %body
     .navbar
       .navbar-inner
@@ -34,10 +31,10 @@
   .container
     .row
       .span12
-        - [:alert, :success, :info].each do |msg_type|
-          .alert-box{class: msg_type}
-            %a.close{href: '#'} &times
-            %span= flash[msg_type]
+        - flash.each do |msg_type, message|
+          .alert{class: "alert-#{msg_type}"}
+            %button.close{type: :button, :'data-dismiss' => :alert} &times;
+            %span= message
 
     .row
       .span12
