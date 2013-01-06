@@ -68,7 +68,7 @@ jQuery ->
     $(input).observe_field 0.2, () ->
       show_element 'spinner'
 
-      if $(input).data('last-check-value') == $(input).val()
+      unless content_changed(input)
         hide_elements()
       else
         $(input).data('last-check-value', $(input).val())
