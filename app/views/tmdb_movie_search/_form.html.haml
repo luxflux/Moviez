@@ -4,12 +4,13 @@
 .row-fluid
   .span12
     = form_tag tmdb_movie_search_index_path do
-      = text_field_tag :title, params[:title], placeholder: 'Movie title', autofocus: 'on', autocomplete: 'off', 'data-observe-multiple' => :moviePreviewTitle, 'data-observe-target' => :movie_search
+      = text_field_tag :title, params[:title], placeholder: 'Movie title', autofocus: 'on', autocomplete: 'off', 'data-observe-multiple' => :moviePreviewTitle, 'data-observe-target' => :movie_search, 'data-observe-timer' => 2
 
 .row-fluid
   .span12
     %h2 Results
     #placeholder Nothing searched, yet
+    #nothing_found.hide Didn't find something
     #spinner.hide
       .progress.progress-striped.active
         .bar{style: 'width: 100%'} Searching for movies

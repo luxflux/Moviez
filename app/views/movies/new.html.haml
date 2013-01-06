@@ -1,6 +1,6 @@
 %h1 Search for a new movie
 
-- if @movie.errors
+- if @movie.errors.any?
   .alert.alert-error
     %button.close{type: :button, :'data-dismiss' => :alert} &times;
     %h3 Movie could not be imported
