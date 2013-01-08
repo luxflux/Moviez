@@ -18,15 +18,14 @@
     = favicon_link_tag
 
   %body
-    .navbar
-      .navbar-inner
-        .container
+    .container
+      .navbar
+        .navbar-inner
           = link_to 'Moviezzz', root_path, class: 'brand'
-          .nav-collapse.collapse
-            %ul.nav
-              = nav_link 'All movies', movies_path, [:movies], [:index, :show]
-              = nav_link 'Add Movie', new_movie_path, [:movies], [:new, :create]
-              = nav_link 'About', '/about', [:about], [:index]
+          %ul.nav
+            = nav_link 'All movies', movies_path, [:movies], [:index, :show]
+            = nav_link 'Add Movie', new_movie_path, [:movies], [:new, :create]
+            = nav_link 'About', '/about', [:about], [:index]
 
   .container
     .row
