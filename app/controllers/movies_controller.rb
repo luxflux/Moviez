@@ -64,7 +64,11 @@ class MoviesController < ApplicationController
     @movie = Movie.find(params[:id])
     tmdb_data = TMDB::Movie.find_by_id(@movie.tmdb_id)
     @movie.load_attributes_from_tmdb_data(tmdb_data)
-    @movie.save
+    if @movie.save
+      flash[:success] = "Loaded fields from TMDB"
+    else
+      flash[:error] = "Could not load fields from TMDB"
+    end
     respond_with @movie
   end
 end

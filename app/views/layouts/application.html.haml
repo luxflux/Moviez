@@ -30,7 +30,7 @@
   .container
     .row
       .span12
-        - flash.each do |msg_type, message|
+        - flash.each do |msg_type, message| # error, success and info
           .alert{class: "alert-#{msg_type}"}
             %button.close{type: :button, :'data-dismiss' => :alert} &times;
             %span= message
