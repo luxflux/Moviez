@@ -1,2 +1,39 @@
+@mixin override_gradient_vertical() {
+  //background-color:transparent;
+  background-image: none;
+  background-image: none;
+  background-image: none;
+  background-image: none;
+  background-image: none;
+  background-image: none;
+  background-repeat: no-repeat;
+  filter: none;
+}
+
+//$gridColumnWidth: 70px;
+//$gridGutterWidth: 25px;
+//$gridColumnWidth1200: 80px;
+//$gridGutterWidth1200: 35px;
+
+$linkColor: #297D5B;
+$navbarBackground: #9BC396;
+
+//$gray: #7BAF76;
+//$grayDark: #719486;
+//$grayDarker: #62917E;
+//$grayLight: #91BC8D;
+//$grayLighter: #9BC396;
+
 @import "bootstrap";
 @import "bootstrap-responsive";
+
+.btn,
+.navbar-inner {
+  @include border-radius(0px);
+  @include override_gradient_vertical;
+}
+.navbar .brand,
+.navbar .nav > li > a {
+  text-shadow: none;
+}
+

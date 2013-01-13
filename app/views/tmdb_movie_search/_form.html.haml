@@ -1,12 +1,12 @@
 = template_include_tag 'movie_preview_title'
 = template_include_tag 'movie_preview'
 
-.row-fluid
+.row
   .span12
     = form_tag tmdb_movie_search_index_path do
       = text_field_tag :title, params[:title], placeholder: 'Movie title', autofocus: 'on', autocomplete: 'off', 'data-observe-multiple' => :moviePreviewTitle, 'data-observe-target' => :movie_search, 'data-observe-timer' => 2
 
-.row-fluid
+.row
   .span12
     %h2 Results
     #placeholder Nothing searched, yet

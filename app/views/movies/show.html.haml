@@ -1,19 +1,20 @@
 - model_class = Movie
+
 .page-header
   %h1=t '.title', :default => model_class.model_name.human
 
-.row-fluid
-  .span2= image_tag @movie.image
+.row
+  .span2= image_tag @movie.image, class: 'img-polaroid'
   .span10
     %h3
       = @movie.title
       %small= @movie.tagline
-    .row-fluid
+    .row
       .span2= model_class.human_attribute_name(:disc_number)
       .span2= @movie.disc_number
-      .span8= @movie.watched
-    .row-fluid
-      .span12= @movie.overview
+      .span6= @movie.watched
+    .row
+      .span10= @movie.overview
 
 .form-actions
   = link_to t('.back', :default => t("helpers.links.back")), movies_path, :class => 'btn'
