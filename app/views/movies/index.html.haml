@@ -6,8 +6,8 @@
 %ul#movies.thumbnails
   = render @movies
 
-#pagination
-  = paginate @movies
+#pagination.hide{data: {total_pages: @movies.total_pages, url: movies_path, model: 'movie', target: '#movies'}}
+
 #spinner.hide
   .progress.progress-striped.active
     .bar{style: 'width: 100%'} Fetching movies
