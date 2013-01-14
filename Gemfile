@@ -20,6 +20,7 @@ gem 'pg_search'
 gem 'poirot'
 gem 'draper'
 gem 'ruby-tmdb3'
+gem 'kaminari'
 
 gem 'airbrake'
 
