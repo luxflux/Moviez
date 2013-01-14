@@ -1,0 +1,90 @@
+#!/usr/bin/env ruby
+
+VIDEODB_HOST = 'localhost'
+VIDEODB_USER = 'root'
+VIDEODB_PASS = 'bw3flgkm7'
+VIDEODB_DATABASE = 'videodb'
+MOVIEZZ_SITE = 'http://moviez.dev'
+
+require 'mysql2'
+require 'her'
+
+class JSONRequest < Faraday::Middleware
+  def initialize(app, options={})
+    @app = app
+  end
+  def call(env)
+    env[:request_headers]['Accept'] = 'application/json'
+    @app.call(env)
+  end
+end
+
+Her::API.setup :url => MOVIEZZ_SITE do |connection|
+  connection.use JSONRequest
+  connection.use Faraday::Request::UrlEncoded
+  connection.use Her::Middleware::DefaultParseJSON
+  connection.use Faraday::Adapter::NetHttp
+end
+
+class TMDBMovieSearch
+  include Her::Model
+
+  def self.find_by_title(title)
+    get_collection '/tmdb_movie_searches', title: title
+  end
+end
+
+class Movie
+  include Her::Model
+end
+
+class MoviezzAdder
+
+  def initialize(data)
+    @data = data
+  end
+
+  def search
+    search_with_all_attributes
+    return found_one if @search.length == 1
+    false
+  end
+
+  def add
+    movie = Movie.new(movie: {tmdb_id: @search_result.id, disc_number: @data[:diskid]})
+    if movie.save
+      puts "Movie #{@data[:title]} added"
+    else
+      puts "Movie could not be saved: #{movie.errors.inspect}"
+    end
+  end
+
+  private
+  def search_with_all_attributes
+    string = "#{@data[:title]} #{@data[:subtitle]} #{@data[:year]}"
+    @search = TMDBMovieSearch.find_by_title(string)
+  end
+
+  def found_one
+    @search_result = @search.first
+  end
+
+end
+
+mysql = Mysql2::Client.new host: VIDEODB_HOST, username: VIDEODB_USER, password: VIDEODB_PASS, database: VIDEODB_DATABASE
+#result = mysql.query 'SELECT title, subtitle, diskid, year FROM videodata LIMIT 1'
+result = mysql.query 'SELECT title, subtitle, diskid, year FROM videodata'
+
+migrate_data = []
+result.each(symbolize_keys: true) do |row|
+  migrate_data << row
+end
+
+migrate_data.each do |data|
+  adder = MoviezzAdder.new(data)
+  if adder.search
+    adder.add
+  else
+    puts "Movie had none or multiple entries: #{data[:title]}"
+  end
+end
