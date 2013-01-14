@@ -3,6 +3,11 @@
 
 = template_include_tag 'movie'
 
-//- @movies.in_groups_of(6, false) do |movies|
 %ul#movies.thumbnails
   = render @movies
+
+#pagination
+  = paginate @movies
+#spinner.hide
+  .progress.progress-striped.active
+    .bar{style: 'width: 100%'} Fetching movies
