@@ -23,6 +23,8 @@ gem 'ruby-tmdb3'
 
 gem 'airbrake'
 
+gem 'newrelic_rpm'
+
 group :development do
   gem 'rspec-rails'
   gem 'capybara'
