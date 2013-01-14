@@ -37,7 +37,41 @@ $navbarBackground: #9BC396;
   text-shadow: none;
 }
 
-.thumbnails .span2:nth-child(7) {
-  clear: left;
+@media (min-width: 1200px) {
+  .movie-gallery img {
+    width: 154px;
+    height: 231px;
+  }
+}
+
+@media (min-width: 980px) and (max-width: 1199px) {
+  .movie-gallery img {
+    width: 130px;
+    height: 195px;
+  }
+}
+
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 768px) and (max-width: 979px) {
+  .movie-gallery img {
+    width: 94px;
+    height: 141px;
+  }
+}
+
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) {
+  .movie-gallery img {
+    width: 130px;
+    height: 195px;
+  }
+}
+
+/* Landscape phones and down */
+@media (max-width: 480px) {
+  .movie-gallery img {
+    width: 154px;
+    height: 231px;
+  }
 }
 

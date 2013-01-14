@@ -3,7 +3,7 @@
 
 = template_include_tag 'movie'
 
-%ul#movies.thumbnails
+%ul#movies.thumbnails.movie-gallery
   = render @movies
 
 #pagination.hide{data: {total_pages: @movies.total_pages, url: movies_path, model: 'movie', target: '#movies'}}
