@@ -1,13 +1,18 @@
-= form_tag movies_path, method: :get, class: 'form-search' do
-  = text_field_tag :query, params[:query], placeholder: 'Filter movies', autofocus: 'autofocus', 'data-observe-multiple' => :movie, 'data-observe-target' => :movies, class: 'search-query input-block-level'
+.row
+  .span12
+    = form_tag movies_path, method: :get, class: 'form-search' do
+      = text_field_tag :query, params[:query], placeholder: 'Filter movies', autofocus: 'autofocus', 'data-observe-multiple' => :movie, 'data-observe-target' => :movies, class: 'search-query input-block-level'
 
-= template_include_tag 'movie'
+.row
+  .span12
+    = template_include_tag 'movie'
 
-%ul#movies.thumbnails.movie-gallery
-  = render @movies
+    %ul#movies.thumbnails.movie-gallery
+      = render @movies
 
-#pagination.hide{data: {total_pages: @movies.total_pages, url: movies_path, model: 'movie', target: '#movies'}}
+    #pagination.hide{data: {total_pages: @movies.total_pages, url: movies_path, model: 'movie', target: '#movies'}}
 
-#spinner.hide
-  .progress.progress-striped.active
-    .bar{style: 'width: 100%'} Fetching movies
+.row
+  .span12.pagination-centered
+    #spinner.well
+      %i.icon-spinner.icon-spin.icon-3x
