@@ -19,13 +19,20 @@
 
   %body
     .container
-      .navbar
-        .navbar-inner
-          = link_to 'Moviezzz', root_path, class: 'brand'
-          %ul.nav
-            = nav_link 'All movies', movies_path, [:movies], [:index, :show]
-            = nav_link 'Add Movie', new_movie_path, [:movies], [:new, :create]
-            = nav_link 'About', '/about', [:about], [:index]
+      .row
+        .span6
+          %h1.brand
+            = link_to 'Moviezzz', root_path
+        .span6.tr
+          %h1
+            - unless current_path?(new_movie_path)
+              %a.pull-right{href: new_movie_path}
+                Add movie
+                %i.icon-arrow-right
+            - else
+              %a.pull-right{href: movies_path}
+                Back to list
+                %i.icon-arrow-left
 
   .container
     .row

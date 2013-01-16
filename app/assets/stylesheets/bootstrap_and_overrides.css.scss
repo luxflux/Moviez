@@ -10,31 +10,40 @@
   filter: none;
 }
 
-//$gridColumnWidth: 70px;
-//$gridGutterWidth: 25px;
-//$gridColumnWidth1200: 80px;
-//$gridGutterWidth1200: 35px;
-
 $linkColor: #297D5B;
-$navbarBackground: #9BC396;
-
-//$gray: #7BAF76;
-//$grayDark: #719486;
-//$grayDarker: #62917E;
-//$grayLight: #91BC8D;
-//$grayLighter: #9BC396;
 
 @import "bootstrap";
 @import "bootstrap-responsive";
+@import "font-awesome";
 
-.btn,
-.navbar-inner {
+.btn {
   @include border-radius(0px);
   @include override_gradient_vertical;
 }
-.navbar .brand,
-.navbar .nav > li > a {
-  text-shadow: none;
+
+.tl { text-align: left }
+.tr { text-align: right }
+.tc { text-align: center }
+
+@font-face {
+  font-family: 'Anaheim';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Anaheim'), local('Anaheim-Regular'), font-url('Anaheim-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Amaranth';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Amaranth'), local('Amaranth-Regular'), font-url('Amaranth-Regular.ttf') format('truetype');
+}
+
+h1,h2,h3,h4,h5 {
+  font-family: Anaheim;
+  //font-family: Amaranth;
+}
+h1.brand {
+  font-family: Amaranth;
 }
 
 @media (min-width: 1200px) {
