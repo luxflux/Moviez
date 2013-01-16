@@ -21,9 +21,9 @@ gem 'poirot'
 gem 'draper'
 gem 'ruby-tmdb3'
 gem 'kaminari'
+gem "font-awesome-rails"
 
 gem 'airbrake'
-
 gem 'newrelic_rpm'
 
 group :development do
