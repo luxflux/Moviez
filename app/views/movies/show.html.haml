@@ -1,14 +1,13 @@
 - model_class = Movie
 
 .page-header
-  %h1=t '.title', :default => model_class.model_name.human
+  %h1
+    = @movie.title
+    %small= @movie.tagline
 
 .row
   .span2= image_tag @movie.image, class: 'img-polaroid'
   .span10
-    %h3
-      = @movie.title
-      %small= @movie.tagline
     .row
       .span2= model_class.human_attribute_name(:disc_number)
       .span2= @movie.disc_number
