@@ -11,9 +11,9 @@
     %h2 Results
     #placeholder Nothing searched, yet
     #nothing_found.hide Didn't find something
-    #spinner.hide
-      .progress.progress-striped.active
-        .bar{style: 'width: 100%'} Searching for movies
+    #spinner.hide.well.tc
+      %i.icon-spinner.icon-spin.icon-large
+      Searching for movies
 
     = form_for Movie.new do
       #movie_search.accordion

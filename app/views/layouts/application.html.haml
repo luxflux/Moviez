@@ -25,14 +25,14 @@
             = link_to 'Moviezzz', root_path
         .span6.tr
           %h1
-            - unless current_path?(new_movie_path)
-              %a.pull-right{href: new_movie_path}
-                Add movie
-                %i.icon-arrow-right
-            - else
+            - if not current_path?(movies_path) and not current_path?(root_path)
               %a.pull-right{href: movies_path}
                 %i.icon-arrow-left
                 Back to list
+            - else
+              %a.pull-right{href: new_movie_path}
+                Add movie
+                %i.icon-arrow-right
 
   .container
     .row
