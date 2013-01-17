@@ -5,3 +5,4 @@
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
 Moviez::Application.config.secret_token = ENV['SECRET_TOKEN']
+Moviez::Application.config.secret_token = SecureRandom.hex(32) if Rails.env.test?
