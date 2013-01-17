@@ -1,4 +1,4 @@
-class TMDBMovieSearchesController < ApplicationController
+class TMDBMoviesController < ApplicationController
 
   respond_to :json
 

@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'ostruct'
 
-describe TMDBMovieSearchController do
+describe TMDBMoviesController do
 
   let(:tmdb_movie) { tmdb_result }
 
@@ -13,10 +13,10 @@ describe TMDBMovieSearchController do
     end
   end
 
-  describe "POST 'create'" do
+  describe "GET 'index'" do
     it "returns http success" do
       TMDB::Movie.should_receive(:search).with(title: 'Star Wars').and_return([tmdb_movie, tmdb_movie])
-      post 'create', title: 'Star Wars'
+      get 'index', title: 'Star Wars'
       response.should be_success
     end
   end

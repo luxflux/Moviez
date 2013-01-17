@@ -1,2 +1,0 @@
-module TMDBMovieSearchHelper
-end
