@@ -54,7 +54,7 @@ def tmdb_result
     posters: [
       OpenStruct.new(
         sizes: OpenStruct.new(
-          w154: OpenStruct.new(url: 'http://tmdb.org/nice_pic.png')
+          w154: OpenStruct.new(url: 'nice_pic.png')
         )
       )
     ],

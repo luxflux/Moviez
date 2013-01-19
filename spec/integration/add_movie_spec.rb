@@ -5,12 +5,21 @@ describe 'add a movie' do
   let(:tmdb_movie) { tmdb_result }
 
   it 'searches for the given title', js: true do
-    TMDB::Movie.should_receive(:search).with(title: 'Star Wars').and_return([tmdb_movie, tmdb_movie])
+    TMDB::Movie.should_receive(:search).with(title: 'Star Wars').and_return([tmdb_movie])
+    TMDB::Movie.should_receive(:find_by_id).with("1").twice.and_return(tmdb_movie)
 
     visit new_movie_path
     fill_in 'title', with: 'Star Wars'
     page.should have_content('Searching for movies')
     page.should have_content('Star Wars Episode VII')
+
+    click_on 'Star Wars Episode VII (1988)'
+    page.should have_content('Loading movie details')
+    page.should have_content('A lot more words!')
+    click_on 'Select'
+
+    page.should have_css('h1', text: tmdb_movie.title)
+    current_path.should eq("/movies/#{Movie.last.id}")
 
   end
 
