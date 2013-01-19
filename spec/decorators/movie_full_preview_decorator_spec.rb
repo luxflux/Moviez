@@ -17,7 +17,7 @@ describe MovieFullPreviewDecorator do
   its(:tagline) { should eq('Not so much words') }
   its(:overview) { should eq('A lot more words!') }
   its(:imdb_id) { should eq('t123') }
-  its(:cover_url) { should eq('http://tmdb.org/nice_pic.png') }
+  its(:cover_url) { should eq('nice_pic.png') }
   its(:length) { should eq(144) }
   its(:languages) { should eq('English, German, and Spanish') }
   its(:genres) { should eq('Science-Fiction and Action') }
