@@ -10,7 +10,6 @@ describe 'add a movie' do
     visit new_movie_path
     fill_in 'title', with: 'Star Wars'
     page.should have_content('Searching for movies')
-    sleep 3.1
     page.should have_content('Star Wars Episode VII')
 
   end
