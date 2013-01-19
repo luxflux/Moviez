@@ -9,12 +9,12 @@ describe 'add a movie' do
     TMDB::Movie.should_receive(:find_by_id).with("1").twice.and_return(tmdb_movie)
 
     visit new_movie_path
+    page.should_not have_content('Star Wars Episode VII')
     fill_in 'title', with: 'Star Wars'
-    page.should have_content('Searching for movies')
     page.should have_content('Star Wars Episode VII')
 
+    page.should_not have_content('A lot more words!')
     click_on 'Star Wars Episode VII (1988)'
-    page.should have_content('Loading movie details')
     page.should have_content('A lot more words!')
     click_on 'Select'
 

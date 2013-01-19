@@ -1,12 +1,12 @@
 RSpec.configure do |config|
 
-  config.before(:suite) do
+  config.before :suite do
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with :truncation
     Capybara.javascript_driver = :poltergeist
   end
 
-  config.before(:each) do
+  config.before :each do
     if example.metadata[:js]
       DatabaseCleaner.strategy = :truncation
     else
@@ -15,7 +15,7 @@ RSpec.configure do |config|
     end
   end
 
-  config.after(:each) do
+  config.after :each do
     DatabaseCleaner.clean
   end
 end
