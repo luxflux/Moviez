@@ -39,4 +39,5 @@ group :development do
   gem 'sextant'
   gem 'zeus'
   gem 'meta_request'
+  gem 'poltergeist'
 end
