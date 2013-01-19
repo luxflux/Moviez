@@ -3,7 +3,7 @@
 
 .row
   .span12
-    = form_tag tmdb_movie_searches_path do
+    = form_tag tmdb_movies_path do
       = text_field_tag :title, params[:title], placeholder: 'Movie title', autofocus: 'on', autocomplete: 'off', 'data-observe-multiple' => :moviePreviewTitle, 'data-observe-target' => :movie_search, 'data-observe-timer' => 2
 
 .row
