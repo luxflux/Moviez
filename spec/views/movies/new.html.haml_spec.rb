@@ -10,6 +10,7 @@ describe "movies/new.html.haml" do
   subject { rendered }
 
   it { should have_css("form > input#title") }
+  it { should have_css("form[method=get]") }
   it { should have_css("script#movie-preview-title-template") }
   it { should have_css("script#movie-preview-template") }
 end
