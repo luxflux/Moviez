@@ -40,4 +40,5 @@ group :development do
   gem 'zeus'
   gem 'meta_request'
   gem 'poltergeist'
+  gem 'database_cleaner'
 end
