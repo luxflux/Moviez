@@ -6,8 +6,13 @@ VIDEODB_PASS = 'bw3flgkm7'
 VIDEODB_DATABASE = 'videodb'
 MOVIEZZ_SITE = 'http://moviez.dev'
 
+PROGRESS_BAR_OPTIONS = [:bar, :counter, :percentage, :eta, :rate]
+
 require 'mysql2'
 require 'her'
+require 'terminal-table'
+require 'highline/import'
+require 'progress_bar'
 
 class JSONRequest < Faraday::Middleware
   def initialize(app, options={})
@@ -26,11 +31,11 @@ Her::API.setup :url => MOVIEZZ_SITE do |connection|
   connection.use Faraday::Adapter::NetHttp
 end
 
-class TMDBMovieSearch
+class TMDBMovie
   include Her::Model
 
   def self.find_by_title(title)
-    get_collection '/tmdb_movie_searches', title: title
+    get_collection '/tmdb_movies', title: title
   end
 end
 
@@ -38,35 +43,95 @@ class Movie
   include Her::Model
 end
 
-class MoviezzAdder
+class Moviezz
 
-  def initialize(data)
-    @data = data
+  def initialize
+    @moviez = []
   end
 
-  def search
+  def search(data)
+    @data = data
     search_with_all_attributes
-    return found_one if @search.length == 1
-    false
+    handle_search_result
+  end
+
+  def map_found_many
+    @moviez.each do |movie|
+      next unless movie[:result].respond_to?(:each)
+      puts "Data from videodb: #{movie[:data][:title]} - #{movie[:data][:subtitle]} (#{movie[:data][:year]})"
+      table = Terminal::Table.new headings: ['ID', 'Title', 'Year'] do |t|
+        movie[:result].each do |result|
+          t << [result.id, result.title, result.year]
+        end
+      end
+      puts table
+      id = ask('ID to use: ', Integer) { |q| q.in = movie[:result].map { |m| m.id } }
+      movie[:result] = movie[:result].find { |m| m.id == id.to_i }
+    end
   end
 
   def add
-    movie = Movie.new(movie: {tmdb_id: @search_result.id, disc_number: @data[:diskid]})
-    if movie.save
-      puts "Movie #{@data[:title]} added"
-    else
-      puts "Movie could not be saved: #{movie.errors.inspect}"
+    progress_bar = ProgressBar.new @moviez.length, *PROGRESS_BAR_OPTIONS
+    @moviez.each do |movie|
+      unless movie[:result]
+        puts "Movie not found: #{movie[:data][:title]} - #{movie[:data][:title]}"
+      else
+        movie = Movie.new(movie: {tmdb_id: movie[:result].id, disc_number: movie[:data][:diskid]})
+        if movie.save
+          puts "Movie #{@data[:title]} added"
+        else
+          puts "Movie could not be saved: #{movie.errors.inspect}"
+        end
+      end
+      progress_bar.increment!
     end
   end
 
   private
+  def handle_search_result(exclude_none = false)
+    case
+    when (@search.length == 0 and not exclude_none)
+      found_none
+    when @search.length == 1
+      found_one
+    when @search.length > 1
+      found_many
+    end
+  end
+
   def search_with_all_attributes
     string = "#{@data[:title]} #{@data[:subtitle]} #{@data[:year]}"
-    @search = TMDBMovieSearch.find_by_title(string)
+    @search = TMDBMovie.find_by_title(string)
+  end
+
+  def search_with_title_subtitle
+    string = "#{@data[:title]} #{@data[:subtitle]}"
+    @search = TMDBMovie.find_by_title(string)
+  end
+
+  def search_with_title
+    string = "#{@data[:title]}"
+    @search = TMDBMovie.find_by_title(string)
+  end
+
+  def found_none
+    return handle_search_result(true) unless search_with_title_subtitle.empty?
+    return handle_search_result(true) unless search_with_title.empty?
+    @search = nil
+    add_to_moviez
   end
 
   def found_one
-    @search_result = @search.first
+    @search = @search.first
+    add_to_moviez
+  end
+
+  def add_to_moviez
+    @moviez << {data: @data, result: @search}
+  end
+
+  def found_many
+    add_to_moviez
   end
 
 end
@@ -80,11 +145,11 @@ result.each(symbolize_keys: true) do |row|
   migrate_data << row
 end
 
+progress_bar = ProgressBar.new migrate_data.length, *PROGRESS_BAR_OPTIONS
+moviezz = Moviezz.new
 migrate_data.each do |data|
-  adder = MoviezzAdder.new(data)
-  if adder.search
-    adder.add
-  else
-    puts "Movie had none or multiple entries: #{data[:title]}"
-  end
+  moviezz.search(data)
+  progress_bar.increment!
 end
+moviezz.map_found_many
+moviezz.add
