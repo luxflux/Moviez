@@ -26,6 +26,8 @@ gem "font-awesome-rails"
 gem 'airbrake'
 gem 'newrelic_rpm'
 
+gem 'memcache-client'
+
 group :development do
   gem 'rspec-rails'
   gem 'capybara'
