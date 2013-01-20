@@ -47,6 +47,7 @@ class Moviezz
 
   def initialize
     @moviez = []
+    @save_failed = []
   end
 
   def search(data)
@@ -56,8 +57,12 @@ class Moviezz
   end
 
   def map_found_many
+    progress_bar = ProgressBar.new @moviez.length, *PROGRESS_BAR_OPTIONS
     @moviez.each do |movie|
-      next unless movie[:result].respond_to?(:each)
+      unless movie[:result].respond_to?(:each)
+        progress_bar.increment!
+        next
+      end
       puts "Data from videodb: #{movie[:data][:title]} - #{movie[:data][:subtitle]} (#{movie[:data][:year]})"
       table = Terminal::Table.new headings: ['ID', 'Title', 'Year'] do |t|
         movie[:result].each do |result|
@@ -65,23 +70,57 @@ class Moviezz
         end
       end
       puts table
-      id = ask('ID to use: ', Integer) { |q| q.in = movie[:result].map { |m| m.id } }
+      id = ask('ID to use: ', Integer) do |q|
+        q.default = movie[:result].first.id
+        q.in = (movie[:result].map { |m| m.id }).push(-1)
+      end
       movie[:result] = movie[:result].find { |m| m.id == id.to_i }
+      progress_bar.increment!
     end
+  end
+
+  def display_not_found_movies
+    puts "Movies which could not be found"
+    table = Terminal::Table.new headings: ['Title', 'Subtitle', 'Year', 'DiskID'] do |t|
+      @moviez.each do |movie|
+        next unless movie[:result].nil?
+        t << [movie[:data][:title], movie[:data][:subtitle], movie[:data][:year], movie[:data][:diskid]]
+      end
+    end
+    puts table
+  end
+
+  def display_save_failed_movies
+    puts "Errors when saving the movies"
+    table = Terminal::Table.new headings: ['TMDB ID', 'Title', 'DiskID', 'Errors'] do |t|
+      @save_failed.each do |movie|
+        errors = movie[:errors].map do |field,errs|
+          errs.map do |err|
+            "#{field} #{err}"
+          end.join("\n")
+        end.join("\n")
+        t << [movie[:tmdb_id], movie[:title], movie[:disc_number], errors]
+      end
+    end
+    puts table
   end
 
   def add
     progress_bar = ProgressBar.new @moviez.length, *PROGRESS_BAR_OPTIONS
     @moviez.each do |movie|
       unless movie[:result]
-        puts "Movie not found: #{movie[:data][:title]} - #{movie[:data][:title]}"
-      else
-        movie = Movie.new(movie: {tmdb_id: movie[:result].id, disc_number: movie[:data][:diskid]})
-        if movie.save
-          puts "Movie #{@data[:title]} added"
-        else
-          puts "Movie could not be saved: #{movie.errors.inspect}"
-        end
+        progress_bar.increment!
+        next
+      end
+
+      new_movie = Movie.new(tmdb_id: movie[:result].id, disc_number: movie[:data][:diskid])
+      unless new_movie.save
+        @save_failed << {
+          tmdb_id: new_movie.tmdb_id,
+          disc_number: new_movie.disc_number,
+          errors: new_movie.errors,
+          title: movie[:result][:title]
+        }
       end
       progress_bar.increment!
     end
@@ -153,3 +192,5 @@ migrate_data.each do |data|
 end
 moviezz.map_found_many
 moviezz.add
+moviezz.display_not_found_movies
+moviezz.display_save_failed_movies
