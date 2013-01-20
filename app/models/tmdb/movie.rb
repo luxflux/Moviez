@@ -1,5 +1,20 @@
 class TMDB::Movie
 
+  class Cache
+
+    def self.find(options)
+      Rails.cache.fetch self.cache_path(options) do
+        TmdbMovie.find options
+      end
+    end
+
+    private
+    def self.cache_path(args)
+      args.flatten.join('/')
+    end
+
+  end
+
   ATTRIBUTES = [
     :id,
     :title,
@@ -22,12 +37,12 @@ class TMDB::Movie
   end
 
   def self.find_by_id(id)
-    self.new TmdbMovie.find(id: id, expand_results: true)
+    self.new TMDB::Movie::Cache.find(id: id, expand_results: true)
   end
 
   def self.search(search_parameters)
     search_parameters.merge!(expand_results: false)
-    search_result = TmdbMovie.find(search_parameters)
+    search_result = TMDB::Movie::Cache.find(search_parameters)
     if search_result.respond_to?(:map)
       search_result.map do |result|
         self.new result
