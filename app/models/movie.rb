@@ -4,11 +4,11 @@ class Movie < ActiveRecord::Base
 
   attr_accessible :overview, :disc_number, :title, :watched, :tagline, :tmdb_id
 
-  validates :title, :overview, :tmdb_id, presence: true
+  belongs_to :owner
 
+  validates :title, :overview, :tmdb_id, presence: true
   validates :disc_number, numericality: { only_integer: true }, allow_nil: true
   validates :tmdb_id, numericality: { only_integer: true }
-
   validates :disc_number, uniqueness: true, allow_nil: true
 
   include PgSearch
