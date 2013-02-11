@@ -29,6 +29,8 @@ gem 'newrelic_rpm'
 gem 'memcachier'
 gem 'dalli'
 
+gem 'devise'
+
 group :development do
   gem 'rspec-rails'
   gem 'capybara'
