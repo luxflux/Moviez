@@ -30,6 +30,7 @@ gem 'memcachier'
 gem 'dalli'
 
 gem 'devise'
+gem 'cancan'
 
 group :development do
   gem 'rspec-rails'
