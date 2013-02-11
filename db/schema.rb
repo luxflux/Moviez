@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121224152136) do
+ActiveRecord::Schema.define(:version => 20130211164516) do
 
   create_table "movies", :force => true do |t|
     t.string   "title"
@@ -28,5 +28,22 @@ ActiveRecord::Schema.define(:version => 20121224152136) do
   end
 
   add_index "movies", ["disc_number"], :name => "index_movies_on_disc_number", :unique => true
+
+  create_table "owners", :force => true do |t|
+    t.string   "email",                :default => "", :null => false
+    t.string   "encrypted_password",   :default => "", :null => false
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",        :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.string   "authentication_token"
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+  end
+
+  add_index "owners", ["authentication_token"], :name => "index_owners_on_authentication_token", :unique => true
+  add_index "owners", ["email"], :name => "index_owners_on_email", :unique => true
 
 end
