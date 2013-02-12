@@ -6,6 +6,6 @@ FactoryGirl.define do
     overview "Long text"
     tagline 'Short text'
     tmdb_id 1337
-    disc_number 1
+    sequence(:disc_number) { |n| n }
   end
 end

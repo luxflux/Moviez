@@ -2,5 +2,6 @@
 
 FactoryGirl.define do
   factory :owner do
+    sequence(:email) { |n| "mail#{n}@example.org" }
   end
 end
