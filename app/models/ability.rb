@@ -3,7 +3,10 @@ class Ability
 
   def initialize(user)
 
-    can :manage, Movie, owner_id: user.id
+    if user
+      can :manage, Movie, owner_id: user.id
+    end
+
     can :read, Movie
 
     # Define abilities for the passed in user here. For example:
