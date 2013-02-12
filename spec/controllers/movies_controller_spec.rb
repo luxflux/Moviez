@@ -41,11 +41,11 @@ describe MoviesController do
     end
   end
 
-  context 'as owner of movies' do
-    let(:owner) { FactoryGirl.create(:owner) }
+  context 'as user of movies' do
+    let(:user) { FactoryGirl.create(:user) }
 
     before do
-      sign_in :owner, owner
+      sign_in :user, user
     end
 
     describe "GET new" do
@@ -57,7 +57,7 @@ describe MoviesController do
 
     describe "GET edit" do
       it "assigns the requested movie as @movie" do
-        movie = FactoryGirl.create(:movie, owner: owner)
+        movie = FactoryGirl.create(:movie, user: user)
         get :edit, {:id => movie.to_param}
         assigns(:movie).should eq(movie)
       end
@@ -108,7 +108,7 @@ describe MoviesController do
 
     describe "PUT update" do
 
-      let(:movie) { FactoryGirl.create(:movie, owner: owner) }
+      let(:movie) { FactoryGirl.create(:movie, user: user) }
 
       describe "with valid params" do
         it "updates the requested movie" do
@@ -141,7 +141,7 @@ describe MoviesController do
     end
 
     describe "DELETE destroy" do
-      let(:movie) { FactoryGirl.create(:movie, owner: owner) }
+      let(:movie) { FactoryGirl.create(:movie, user: user) }
 
       it "destroys the requested movie" do
         # create a movie
@@ -158,7 +158,7 @@ describe MoviesController do
     end
 
     describe "PUT auto_update" do
-      let(:movie) { FactoryGirl.create(:movie, owner: owner) }
+      let(:movie) { FactoryGirl.create(:movie, user: user) }
 
       it 'updates the given movie with the data from tmdb' do
         TMDB::Movie.should_receive(:find_by_id).with(movie.tmdb_id).and_return(tmdb_result)

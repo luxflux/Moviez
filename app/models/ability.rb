@@ -4,7 +4,7 @@ class Ability
   def initialize(user)
 
     if user
-      can :manage, Movie, owner_id: user.id
+      can :manage, Movie, user_id: user.id
     end
 
     can :read, Movie

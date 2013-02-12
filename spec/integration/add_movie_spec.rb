@@ -5,9 +5,9 @@ describe 'add a movie' do
   let(:tmdb_movie) { tmdb_result }
 
   it 'searches for the given title', js: true do
-    owner = FactoryGirl.create(:owner, password: 'testing123')
-    visit new_owner_session_path
-    fill_in 'Email', with: owner.email
+    user = FactoryGirl.create(:user, password: 'testing123')
+    visit new_user_session_path
+    fill_in 'Email', with: user.email
     fill_in 'Password', with: 'testing123'
     click_on 'Sign in'
 

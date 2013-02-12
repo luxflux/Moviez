@@ -25,12 +25,12 @@ ActiveRecord::Schema.define(:version => 20130211165347) do
     t.text     "overview"
     t.string   "image_url"
     t.integer  "tmdb_id"
-    t.integer  "owner_id"
+    t.integer  "user_id"
   end
 
   add_index "movies", ["disc_number"], :name => "index_movies_on_disc_number", :unique => true
 
-  create_table "owners", :force => true do |t|
+  create_table "users", :force => true do |t|
     t.string   "email",                :default => "", :null => false
     t.string   "encrypted_password",   :default => "", :null => false
     t.datetime "remember_created_at"
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(:version => 20130211165347) do
     t.datetime "updated_at",                           :null => false
   end
 
-  add_index "owners", ["authentication_token"], :name => "index_owners_on_authentication_token", :unique => true
-  add_index "owners", ["email"], :name => "index_owners_on_email", :unique => true
+  add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
 
 end

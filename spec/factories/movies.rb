@@ -7,6 +7,6 @@ FactoryGirl.define do
     tagline 'Short text'
     tmdb_id 1337
     sequence(:disc_number) { |n| n }
-    association :owner
+    association :user
   end
 end

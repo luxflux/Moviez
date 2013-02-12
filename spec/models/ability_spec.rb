@@ -2,11 +2,11 @@ require 'cancan/matchers'
 
 describe Ability do
 
-  let(:owner) { FactoryGirl.create(:owner) }
-  let(:movie) { FactoryGirl.create(:movie, owner_id: owner.id) }
+  let(:user) { FactoryGirl.create(:user) }
+  let(:movie) { FactoryGirl.create(:movie, user_id: user.id) }
 
-  context 'as the owner of the movie' do
-    let(:ability) { Ability.new(owner) }
+  context 'as the user of the movie' do
+    let(:ability) { Ability.new(user) }
 
     subject { ability }
 
@@ -14,7 +14,7 @@ describe Ability do
   end
 
   context 'as an other user' do
-    let(:ability) { Ability.new(FactoryGirl.create(:owner)) }
+    let(:ability) { Ability.new(FactoryGirl.create(:user)) }
 
     subject { ability }
 

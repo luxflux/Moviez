@@ -1,6 +1,6 @@
 Moviez::Application.routes.draw do
 
-  devise_for :owners
+  devise_for :users
 
   resources :tmdb_movies, only: [:index, :show]
 
