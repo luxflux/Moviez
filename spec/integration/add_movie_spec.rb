@@ -5,6 +5,12 @@ describe 'add a movie' do
   let(:tmdb_movie) { tmdb_result }
 
   it 'searches for the given title', js: true do
+    owner = FactoryGirl.create(:owner, password: 'testing123')
+    visit new_owner_session_path
+    fill_in 'Email', with: owner.email
+    fill_in 'Password', with: 'testing123'
+    click_on 'Sign in'
+
     TMDB::Movie.should_receive(:search).with(title: 'Star Wars').and_return([tmdb_movie])
     TMDB::Movie.should_receive(:find_by_id).with("1").twice.and_return(tmdb_movie)
 
