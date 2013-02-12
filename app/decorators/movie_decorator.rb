@@ -1,7 +1,7 @@
 class MovieDecorator < Draper::Base
   decorates :movie
 
-  allows :id, :title, :disc_number, :watched, :overview, :tagline
+  allows :id, :title, :disc_number, :watched, :overview, :tagline, :user_id
 
   def image
     if movie.image_url
@@ -37,7 +37,8 @@ class MovieDecorator < Draper::Base
       image: image,
       url: url,
       tagline: tagline,
-      disc_number_and_watched: disc_number_and_watched
+      disc_number_and_watched: disc_number_and_watched,
+      user_id: user_id
     }
   end
 

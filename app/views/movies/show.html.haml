@@ -15,7 +15,8 @@
     .row
       .span10= @movie.overview
 
-.form-actions
-  = link_to t('.edit', :default => t("helpers.links.edit")), edit_movie_path(@movie), :class => 'btn btn-primary'
-  = link_to t('.auto_update_movie'), auto_update_movie_path(@movie), class: 'btn btn-warning', method: 'put'
-  = link_to t('.destroy', :default => t("helpers.links.destroy")), movie_path(@movie), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
+- if can? :manage, @movie
+  .form-actions
+    = link_to t('.edit', :default => t("helpers.links.edit")), edit_movie_path(@movie), :class => 'btn btn-primary'
+    = link_to t('.auto_update_movie'), auto_update_movie_path(@movie), class: 'btn btn-warning', method: 'put'
+    = link_to t('.destroy', :default => t("helpers.links.destroy")), movie_path(@movie), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
