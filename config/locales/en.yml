@@ -8,3 +8,6 @@ en:
     watched:
       'true': 'Watched'
       'false': 'Unwatched'
+
+  cancan:
+    access_denied: 'You are not authorized to access this page'
