@@ -23,21 +23,12 @@ describe MoviesController do
   # This should return the minimal set of attributes required to create a valid
   # Movie. As you add validations to Movie, be sure to
   # update the return value of this method accordingly.
-  def valid_attributes
-    FactoryGirl.attributes_for(:movie)
-  end
-
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # MoviesController. Be sure to keep this updated too.
-  def valid_session
-    {}
-  end
+  let(:valid_attributes) { FactoryGirl.attributes_for(:movie) }
 
   describe "GET index" do
     it "assigns all movies as @movies" do
       movie = Movie.create! valid_attributes
-      get :index, {}, valid_session
+      get :index, {}
       assigns(:movies).should eq([movie])
     end
   end
@@ -45,149 +36,151 @@ describe MoviesController do
   describe "GET show" do
     it "assigns the requested movie as @movie" do
       movie = Movie.create! valid_attributes
-      get :show, {:id => movie.to_param}, valid_session
+      get :show, {:id => movie.to_param}
       assigns(:movie).should eq(movie)
     end
   end
 
-  describe "GET new" do
-    it "assigns a new movie as @movie" do
-      get :new, {}, valid_session
-      assigns(:movie).should be_a_new(Movie)
-    end
-  end
+  context 'as owner of movies' do
+    let(:owner) { FactoryGirl.create(:owner) }
 
-  describe "GET edit" do
-    it "assigns the requested movie as @movie" do
-      movie = Movie.create! valid_attributes
-      get :edit, {:id => movie.to_param}, valid_session
-      assigns(:movie).should eq(movie)
-    end
-  end
-
-  describe "POST create" do
-    describe "with valid params" do
-      it "creates a new Movie" do
-        TMDB::Movie.should_receive(:find_by_id).and_return(tmdb_result)
-        expect {
-          post :create, {:movie => {:tmdb_id => 1337}}, valid_session
-        }.to change(Movie, :count).by(1)
-      end
-
-      it "assigns a newly created movie as @movie" do
-        TMDB::Movie.should_receive(:find_by_id).and_return(tmdb_result)
-        post :create, {:movie => valid_attributes}, valid_session
-        assigns(:movie).should be_a(Movie)
-        assigns(:movie).should be_persisted
-      end
-
-      it "redirects to the created movie" do
-        TMDB::Movie.should_receive(:find_by_id).and_return(tmdb_result)
-        post :create, {:movie => valid_attributes}, valid_session
-        response.should redirect_to(Movie.last)
-      end
+    before do
+      sign_in :owner, owner
     end
 
-    describe "with invalid params" do
-      let(:invalid_tmdb_result) do
-        result = tmdb_result
-        result.overview = nil
-        result
-      end
-      it "assigns a newly created but unsaved movie as @movie" do
-        TMDB::Movie.stub(:find_by_id).and_return(invalid_tmdb_result)
-        post :create, {:movie => {}}, valid_session
+    describe "GET new" do
+      it "assigns a new movie as @movie" do
+        get :new, {}
         assigns(:movie).should be_a_new(Movie)
       end
-
-      it "re-renders the 'new' template" do
-        TMDB::Movie.stub(:find_by_id).and_return(invalid_tmdb_result)
-        post :create, {:movie => {}}, valid_session
-        response.should render_template("new")
-      end
     end
-  end
 
-  describe "PUT update" do
-    describe "with valid params" do
-      it "updates the requested movie" do
-        movie = Movie.create! valid_attributes
-        # Assuming there are no other movies in the database, this
-        # specifies that the Movie created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        Movie.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, {:id => movie.to_param, :movie => {'these' => 'params'}}, valid_session
-      end
-
+    describe "GET edit" do
       it "assigns the requested movie as @movie" do
-        movie = Movie.create! valid_attributes
-        put :update, {:id => movie.to_param, :movie => valid_attributes}, valid_session
+        movie = FactoryGirl.create(:movie, owner: owner)
+        get :edit, {:id => movie.to_param}
         assigns(:movie).should eq(movie)
       end
+    end
 
-      it "redirects to the movie" do
-        movie = Movie.create! valid_attributes
-        put :update, {:id => movie.to_param, :movie => valid_attributes}, valid_session
-        response.should redirect_to(movie)
+    describe "POST create" do
+      describe "with valid params" do
+        it "creates a new Movie" do
+          TMDB::Movie.should_receive(:find_by_id).and_return(tmdb_result)
+          expect {
+            post :create, {:movie => {:tmdb_id => 1337}}
+          }.to change(Movie, :count).by(1)
+        end
+
+        it "assigns a newly created movie as @movie" do
+          TMDB::Movie.should_receive(:find_by_id).and_return(tmdb_result)
+          post :create, {:movie => valid_attributes}
+          assigns(:movie).should be_a(Movie)
+          assigns(:movie).should be_persisted
+        end
+
+        it "redirects to the created movie" do
+          TMDB::Movie.should_receive(:find_by_id).and_return(tmdb_result)
+          post :create, {:movie => valid_attributes}
+          response.should redirect_to(Movie.last)
+        end
+      end
+
+      describe "with invalid params" do
+        let(:invalid_tmdb_result) do
+          result = tmdb_result
+          result.overview = nil
+          result
+        end
+        it "assigns a newly created but unsaved movie as @movie" do
+          TMDB::Movie.stub(:find_by_id).and_return(invalid_tmdb_result)
+          post :create, {:movie => {}}
+          assigns(:movie).should be_a_new(Movie)
+        end
+
+        it "re-renders the 'new' template" do
+          TMDB::Movie.stub(:find_by_id).and_return(invalid_tmdb_result)
+          post :create, {:movie => {}}
+          response.should render_template("new")
+        end
       end
     end
 
-    describe "with invalid params" do
-      it "assigns the movie as @movie" do
-        movie = Movie.create! valid_attributes
-        put :update, {:id => movie.to_param, :movie => {overview: nil}}, valid_session
-        assigns(:movie).should eq(movie)
+    describe "PUT update" do
+
+      let(:movie) { FactoryGirl.create(:movie, owner: owner) }
+
+      describe "with valid params" do
+        it "updates the requested movie" do
+          Movie.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
+          put :update, {:id => movie.to_param, :movie => {'these' => 'params'}}
+        end
+
+        it "assigns the requested movie as @movie" do
+          put :update, {:id => movie.to_param, :movie => valid_attributes}
+          assigns(:movie).should eq(movie)
+        end
+
+        it "redirects to the movie" do
+          put :update, {:id => movie.to_param, :movie => valid_attributes}
+          response.should redirect_to(movie)
+        end
       end
 
-      it "re-renders the 'edit' template" do
-        movie = Movie.create! valid_attributes
-        put :update, {:id => movie.to_param, :movie => {overview: nil}}, valid_session
-        response.should render_template("edit")
+      describe "with invalid params" do
+        it "assigns the movie as @movie" do
+          put :update, {:id => movie.to_param, :movie => {overview: nil}}
+          assigns(:movie).should eq(movie)
+        end
+
+        it "re-renders the 'edit' template" do
+          put :update, {:id => movie.to_param, :movie => {overview: nil}}
+          response.should render_template("edit")
+        end
       end
     end
-  end
 
-  describe "DELETE destroy" do
-    it "destroys the requested movie" do
-      movie = Movie.create! valid_attributes
-      expect {
-        delete :destroy, {:id => movie.to_param}, valid_session
-      }.to change(Movie, :count).by(-1)
+    describe "DELETE destroy" do
+      let(:movie) { FactoryGirl.create(:movie, owner: owner) }
+
+      it "destroys the requested movie" do
+        # create a movie
+        movie
+        expect {
+          delete :destroy, {:id => movie.id}
+        }.to change(Movie, :count).by(-1)
+      end
+
+      it "redirects to the movies list" do
+        delete :destroy, {:id => movie.id}
+        response.should redirect_to(movies_url)
+      end
     end
 
-    it "redirects to the movies list" do
-      movie = Movie.create! valid_attributes
-      delete :destroy, {:id => movie.to_param}, valid_session
-      response.should redirect_to(movies_url)
-    end
-  end
+    describe "PUT auto_update" do
+      let(:movie) { FactoryGirl.create(:movie, owner: owner) }
 
-  describe "PUT auto_update" do
-    let(:movie) do
-      FactoryGirl.create(:movie)
-    end
-
-    it 'updates the given movie with the data from tmdb' do
-      TMDB::Movie.should_receive(:find_by_id).with(movie.tmdb_id).and_return(tmdb_result)
-      expect {
-        put :auto_update, {id: movie.id}, valid_session
-      }.to change { movie.reload.tagline }
-    end
-
-    context "as html" do
-      it 'redirects to the movie' do
+      it 'updates the given movie with the data from tmdb' do
         TMDB::Movie.should_receive(:find_by_id).with(movie.tmdb_id).and_return(tmdb_result)
-        put :auto_update, {id: movie.id}, valid_session
-        response.should redirect_to movie_path(movie)
+        expect {
+          put :auto_update, {id: movie.id}
+        }.to change { movie.reload.tagline }
       end
-    end
 
-    context "as json" do
-      it 'renders success' do
-        TMDB::Movie.should_receive(:find_by_id).with(movie.tmdb_id).and_return(tmdb_result)
-        put :auto_update, {id: movie.id, format: :json}
-        response.should be_success
+      context "as html" do
+        it 'redirects to the movie' do
+          TMDB::Movie.should_receive(:find_by_id).with(movie.tmdb_id).and_return(tmdb_result)
+          put :auto_update, {id: movie.id}
+          response.should redirect_to movie_path(movie)
+        end
+      end
+
+      context "as json" do
+        it 'renders success' do
+          TMDB::Movie.should_receive(:find_by_id).with(movie.tmdb_id).and_return(tmdb_result)
+          put :auto_update, {id: movie.id, format: :json}
+          response.should be_success
+        end
       end
     end
   end
