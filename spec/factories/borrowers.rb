@@ -2,8 +2,8 @@
 
 FactoryGirl.define do
   factory :borrower do
-    first_name "MyString"
-    family_name "MyString"
-    email "MyString"
+    first_name "John"
+    family_name "Doe"
+    email "mail@example.org"
   end
 end

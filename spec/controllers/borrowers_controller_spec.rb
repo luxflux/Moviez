@@ -23,21 +23,12 @@ describe BorrowersController do
   # This should return the minimal set of attributes required to create a valid
   # Borrower. As you add validations to Borrower, be sure to
   # update the return value of this method accordingly.
-  def valid_attributes
-    {}
-  end
-
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # BorrowersController. Be sure to keep this updated too.
-  def valid_session
-    {}
-  end
+  let(:valid_attributes) { FactoryGirl.attributes_for(:borrower) }
 
   describe "GET index" do
     it "assigns all borrowers as @borrowers" do
       borrower = Borrower.create! valid_attributes
-      get :index, {}, valid_session
+      get :index, {}
       assigns(:borrowers).should eq([borrower])
     end
   end
@@ -45,14 +36,14 @@ describe BorrowersController do
   describe "GET show" do
     it "assigns the requested borrower as @borrower" do
       borrower = Borrower.create! valid_attributes
-      get :show, {:id => borrower.to_param}, valid_session
+      get :show, {:id => borrower.to_param}
       assigns(:borrower).should eq(borrower)
     end
   end
 
   describe "GET new" do
     it "assigns a new borrower as @borrower" do
-      get :new, {}, valid_session
+      get :new, {}
       assigns(:borrower).should be_a_new(Borrower)
     end
   end
@@ -60,7 +51,7 @@ describe BorrowersController do
   describe "GET edit" do
     it "assigns the requested borrower as @borrower" do
       borrower = Borrower.create! valid_attributes
-      get :edit, {:id => borrower.to_param}, valid_session
+      get :edit, {:id => borrower.to_param}
       assigns(:borrower).should eq(borrower)
     end
   end
@@ -69,18 +60,18 @@ describe BorrowersController do
     describe "with valid params" do
       it "creates a new Borrower" do
         expect {
-          post :create, {:borrower => valid_attributes}, valid_session
+          post :create, {:borrower => valid_attributes}
         }.to change(Borrower, :count).by(1)
       end
 
       it "assigns a newly created borrower as @borrower" do
-        post :create, {:borrower => valid_attributes}, valid_session
+        post :create, {:borrower => valid_attributes}
         assigns(:borrower).should be_a(Borrower)
         assigns(:borrower).should be_persisted
       end
 
       it "redirects to the created borrower" do
-        post :create, {:borrower => valid_attributes}, valid_session
+        post :create, {:borrower => valid_attributes}
         response.should redirect_to(Borrower.last)
       end
     end
@@ -89,14 +80,14 @@ describe BorrowersController do
       it "assigns a newly created but unsaved borrower as @borrower" do
         # Trigger the behavior that occurs when invalid params are submitted
         Borrower.any_instance.stub(:save).and_return(false)
-        post :create, {:borrower => {}}, valid_session
+        post :create, {:borrower => {}}
         assigns(:borrower).should be_a_new(Borrower)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Borrower.any_instance.stub(:save).and_return(false)
-        post :create, {:borrower => {}}, valid_session
+        post :create, {:borrower => {}}
         response.should render_template("new")
       end
     end
@@ -111,18 +102,18 @@ describe BorrowersController do
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
         Borrower.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, {:id => borrower.to_param, :borrower => {'these' => 'params'}}, valid_session
+        put :update, {:id => borrower.to_param, :borrower => {'these' => 'params'}}
       end
 
       it "assigns the requested borrower as @borrower" do
         borrower = Borrower.create! valid_attributes
-        put :update, {:id => borrower.to_param, :borrower => valid_attributes}, valid_session
+        put :update, {:id => borrower.to_param, :borrower => valid_attributes}
         assigns(:borrower).should eq(borrower)
       end
 
       it "redirects to the borrower" do
         borrower = Borrower.create! valid_attributes
-        put :update, {:id => borrower.to_param, :borrower => valid_attributes}, valid_session
+        put :update, {:id => borrower.to_param, :borrower => valid_attributes}
         response.should redirect_to(borrower)
       end
     end
@@ -132,7 +123,7 @@ describe BorrowersController do
         borrower = Borrower.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Borrower.any_instance.stub(:save).and_return(false)
-        put :update, {:id => borrower.to_param, :borrower => {}}, valid_session
+        put :update, {:id => borrower.to_param, :borrower => {}}
         assigns(:borrower).should eq(borrower)
       end
 
@@ -140,7 +131,7 @@ describe BorrowersController do
         borrower = Borrower.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Borrower.any_instance.stub(:save).and_return(false)
-        put :update, {:id => borrower.to_param, :borrower => {}}, valid_session
+        put :update, {:id => borrower.to_param, :borrower => {}}
         response.should render_template("edit")
       end
     end
@@ -150,13 +141,13 @@ describe BorrowersController do
     it "destroys the requested borrower" do
       borrower = Borrower.create! valid_attributes
       expect {
-        delete :destroy, {:id => borrower.to_param}, valid_session
+        delete :destroy, {:id => borrower.to_param}
       }.to change(Borrower, :count).by(-1)
     end
 
     it "redirects to the borrowers list" do
       borrower = Borrower.create! valid_attributes
-      delete :destroy, {:id => borrower.to_param}, valid_session
+      delete :destroy, {:id => borrower.to_param}
       response.should redirect_to(borrowers_url)
     end
   end
