@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :loan do
-    borrower nil
-    movie nil
+    borrower
+    movie
   end
 end
