@@ -1,0 +1,17 @@
+%h1 Listing borrowers
+
+%table
+  %tr
+    %th
+    %th
+    %th
+
+  - @borrowers.each do |borrower|
+    %tr
+      %td= link_to 'Show', borrower
+      %td= link_to 'Edit', edit_borrower_path(borrower)
+      %td= link_to 'Destroy', borrower, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Borrower', new_borrower_path
