@@ -11,7 +11,25 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130211165347) do
+ActiveRecord::Schema.define(:version => 20130219081535) do
+
+  create_table "borrowers", :force => true do |t|
+    t.string   "first_name"
+    t.string   "family_name"
+    t.string   "email"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "loans", :force => true do |t|
+    t.integer  "borrower_id"
+    t.integer  "movie_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "loans", ["borrower_id"], :name => "index_loans_on_borrower_id"
+  add_index "loans", ["movie_id"], :name => "index_loans_on_movie_id"
 
   create_table "movies", :force => true do |t|
     t.string   "title"
