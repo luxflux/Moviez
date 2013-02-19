@@ -5,5 +5,6 @@ FactoryGirl.define do
     first_name "John"
     family_name "Doe"
     email "mail@example.org"
+    user
   end
 end

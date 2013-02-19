@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   #
 
   has_many :movies
+  has_many :borrowers
 
   validates :email, uniqueness: true
 end
