@@ -1,5 +1,14 @@
 %p#notice= notice
 
+%p
+  %b First name:
+  = @borrower.first_name
+%p
+  %b Family name:
+  = @borrower.family_name
+%p
+  %b Email:
+  = @borrower.email
 
 = link_to 'Edit', edit_borrower_path(@borrower)
 \|
