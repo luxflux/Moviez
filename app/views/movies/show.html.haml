@@ -1,3 +1,17 @@
+:javascript
+  handle_ajax_error = function(response) {
+    console.log(response);
+    console.log(response.responseText);
+    try { var responseText = jQuery.parseJSON(response.responseText); } catch(e) { var responseText = null; }
+    if (responseText !== null) {
+      var responseMsg = responseText.error;
+    } else {
+      responseMsg = 'There was an unknown error or the request timed out.  Please try again later';
+    }
+
+    return responseMsg;
+  }
+
 - model_class = Movie
 
 .page-header
@@ -15,8 +29,28 @@
     .row
       .span10= @movie.overview
 
+- if @loan
+  #loan-modal.modal.hide.fade
+    .modal-header
+      %button.close{type: :button, :'data-dismiss' => :modal, :'aria-hidden' => true} &times;
+      %h3= t('.lend.title', title: @movie.title)
+
+    = simple_form_for([@movie, @loan], :html => { :class => 'form-horizontal' }, remote: true) do |f|
+      .modal-body
+        #error_explanation
+        = f.association :borrower
+      .modal-footer
+        %button.btn{:'data-dismiss' => :modal, :'aria-hidden' => true}= t('.lend.cancel')
+        = f.button :submit, class: 'btn btn-primary'
+
 - if can? :manage, @movie
   .form-actions
     = link_to t('.edit', :default => t("helpers.links.edit")), edit_movie_path(@movie), :class => 'btn btn-primary'
     = link_to t('.auto_update_movie'), auto_update_movie_path(@movie), class: 'btn btn-warning', method: 'put'
     = link_to t('.destroy', :default => t("helpers.links.destroy")), movie_path(@movie), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
+    = link_to t('.lend.link'), '#loan-modal', :'data-toggle' => 'modal', class: 'btn btn-primary'
+
+:javascript
+  $('#new_loan').on('ajax:error', function(event, response, error){
+    $('#error_explanation').html(handle_ajax_error(response));
+  });

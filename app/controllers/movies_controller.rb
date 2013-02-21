@@ -15,6 +15,7 @@ class MoviesController < ApplicationController
   # GET /movies/1
   # GET /movies/1.json
   def show
+    @loan = Loan.new(movie: @movie)
     @movie = MovieDecorator.decorate(@movie)
     respond_with @movie
   end

@@ -9,5 +9,11 @@ en:
       'true': 'Watched'
       'false': 'Unwatched'
 
+  movies:
+    show:
+      lend:
+        title: 'Lend %{title}'
+        link: 'Lend'
+
   cancan:
     access_denied: 'You are not authorized to access this page'

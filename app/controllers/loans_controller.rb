@@ -40,15 +40,14 @@ class LoansController < ApplicationController
   # POST /loans
   # POST /loans.json
   def create
-    @loan = Loan.new(params[:loan])
+    @movie = Movie.find(params[:movie_id])
+    @loan = @movie.loans.new(params[:loan])
 
     respond_to do |format|
       if @loan.save
-        format.html { redirect_to @loan, notice: 'Loan was successfully created.' }
         format.json { render json: @loan, status: :created, location: @loan }
       else
-        format.html { render action: "new" }
-        format.json { render json: @loan.errors, status: :unprocessable_entity }
+        format.json { render json: {error: @loan.errors.full_messages.to_sentence}, status: :unprocessable_entity }
       end
     end
   end
