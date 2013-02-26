@@ -1,7 +1,6 @@
 class Borrower < ActiveRecord::Base
 
-  has_many :loans, dependent: :destroy
-  has_many :movies, through: :loans
+  has_many :movies
 
   belongs_to :user
 

@@ -5,8 +5,7 @@ class Movie < ActiveRecord::Base
   attr_accessible :overview, :disc_number, :title, :watched, :tagline, :tmdb_id
 
   belongs_to :user
-  has_many :loans, dependent: :destroy
-  has_many :borrowers, through: :loans
+  belongs_to :borrower
 
   validates :title, :overview, :tmdb_id, presence: true
   validates :disc_number, numericality: { only_integer: true }, allow_nil: true
