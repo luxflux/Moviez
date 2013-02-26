@@ -1,13 +1,12 @@
 class BorrowersController < ApplicationController
+
+  respond_to :html, :json
+
   # GET /borrowers
   # GET /borrowers.json
   def index
-    @borrowers = Borrower.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @borrowers }
-    end
+    @borrowers = BorrowerDecorator.all
+    respond_with(@borrowers)
   end
 
   # GET /borrowers/1

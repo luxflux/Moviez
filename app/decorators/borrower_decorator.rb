@@ -1,6 +1,17 @@
 class BorrowerDecorator < Draper::Base
   decorates :borrower
 
+  def title_value
+    "#{first_name} #{family_name}"
+  end
+
+  def as_json(options = {})
+    {
+      id: id,
+      title_value: title_value
+    }
+  end
+
   # Accessing Helpers
   #   You can access any helper via a proxy
   #

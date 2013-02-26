@@ -25,8 +25,9 @@
       .modal-body
         #error_explanation
         .input-append
-          = f.input :borrower, wrapper: :append, label: false do
-            = f.text_field :borrower
+          = f.input :borrower, wrapper: :append do
+            = f.hidden_field :borrower_id
+            = text_field :other, :borrower_selection, autocomplete: :off, data: {:'typeahead-url' => borrowers_path(:json), :'typeahead-target' => :loan_borrower_id}
             %a.add-on{href: new_borrower_path}
               %i.icon-plus
       .modal-footer
