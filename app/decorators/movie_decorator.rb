@@ -1,7 +1,7 @@
 class MovieDecorator < Draper::Base
   decorates :movie
 
-  allows :id, :title, :disc_number, :watched, :overview, :tagline, :user_id
+  #allows :id, :title, :disc_number, :watched, :overview, :tagline, :user_id, :to_key, :borrower_id
 
   def image
     if movie.image_url

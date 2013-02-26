@@ -15,8 +15,6 @@ class MoviesController < ApplicationController
   # GET /movies/1
   # GET /movies/1.json
   def show
-    @borrowers = Borrower.all.map { |borrower| "#{borrower.first_name} #{borrower.family_name}" }
-    @loan = Loan.new(movie: @movie)
     @movie = MovieDecorator.decorate(@movie)
     respond_with @movie
   end
@@ -46,8 +44,12 @@ class MoviesController < ApplicationController
   # PUT /movies/1.json
   def update
     @movie.update_attributes(params[:movie])
-    @movie.save
-    respond_with @movie
+    respond_with(@movie) do |format|
+      format.js do
+        flash[:success] = I18n.t('movies.update.ok')
+        render js: 'window.location.reload()'
+      end
+    end
   end
 
   # DELETE /movies/1

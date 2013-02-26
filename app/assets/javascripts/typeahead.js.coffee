@@ -16,7 +16,5 @@ jQuery ->
 
           process element.labels
       updater: (item) ->
-        console.log element.mapped[item]
-        console.log element.mapped
         $("##{element.data('typeahead-target')}").val(element.mapped[item])
         item

@@ -13,21 +13,24 @@
       .span2= @movie.disc_number
       .span6= @movie.watched
     .row
+      .span2= model_class.human_attribute_name(:borrower)
+      .span8= @movie.borrower
+    .row
       .span10= @movie.overview
 
-- if @loan
+- if can? :edit, @movie
   #loan-modal.modal.hide.fade
     .modal-header
       %button.close{type: :button, :'data-dismiss' => :modal, :'aria-hidden' => true} &times;
       %h3= t('.lend.title', title: @movie.title)
 
-    = simple_form_for([@movie, @loan], :html => { :class => 'form-horizontal' }, remote: true) do |f|
+    = simple_form_for(@movie, :html => { :class => 'form-horizontal' }, remote: true) do |f|
       .modal-body
         #error_explanation
         .input-append
           = f.input :borrower, wrapper: :append do
             = f.hidden_field :borrower_id
-            = text_field :other, :borrower_selection, autocomplete: :off, data: {:'typeahead-url' => borrowers_path(:json), :'typeahead-target' => :loan_borrower_id}
+            = text_field :other, :borrower_selection, autocomplete: :off, data: {:'typeahead-url' => borrowers_path(:json), :'typeahead-target' => :movie_borrower_id}
             %a.add-on{href: new_borrower_path}
               %i.icon-plus
       .modal-footer

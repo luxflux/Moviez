@@ -2,7 +2,7 @@ class Movie < ActiveRecord::Base
 
   TMDB_FIELDS = [:title, :imdb_id, :overview, :tagline]
 
-  attr_accessible :overview, :disc_number, :title, :watched, :tagline, :tmdb_id
+  attr_accessible :overview, :disc_number, :title, :watched, :tagline, :tmdb_id, :borrower_id
 
   belongs_to :user
   belongs_to :borrower

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130219201639) do
+ActiveRecord::Schema.define(:version => 20130226075615) do
 
   create_table "borrowers", :force => true do |t|
     t.string   "first_name"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(:version => 20130219201639) do
     t.string   "image_url"
     t.integer  "tmdb_id"
     t.integer  "user_id"
+    t.integer  "borrower_id"
   end
 
   add_index "movies", ["disc_number"], :name => "index_movies_on_disc_number", :unique => true
