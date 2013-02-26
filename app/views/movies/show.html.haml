@@ -18,7 +18,7 @@
     .row
       .span10= @movie.overview
 
-- if can? :edit, @movie
+- if can? :manage, @movie
   #loan-modal.modal.hide.fade
     .modal-header
       %button.close{type: :button, :'data-dismiss' => :modal, :'aria-hidden' => true} &times;
@@ -37,7 +37,6 @@
         %button.btn{:'data-dismiss' => :modal, :'aria-hidden' => true}= t('.lend.cancel')
         = f.button :submit, class: 'btn btn-primary'
 
-- if can? :manage, @movie
   .form-actions
     = link_to t('.edit', :default => t("helpers.links.edit")), edit_movie_path(@movie), :class => 'btn btn-primary'
     = link_to t('.auto_update_movie'), auto_update_movie_path(@movie), class: 'btn btn-warning', method: 'put'
