@@ -14,7 +14,7 @@
       .span6= @movie.watched
     .row
       .span2= model_class.human_attribute_name(:borrower)
-      .span8= @movie.borrower
+      .span8= @movie.borrower.title_value
     .row
       .span10= @movie.overview
 

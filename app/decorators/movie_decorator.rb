@@ -27,6 +27,10 @@ class MovieDecorator < Draper::Base
     [disc_number, watched.camelize(:lower)].to_sentence
   end
 
+  def borrower
+    BorrowerDecorator.decorate(model.borrower) if model.borrower
+  end
+
   def as_json(options = {})
     {
       id: id,
