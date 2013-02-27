@@ -1,11 +1,12 @@
 class BorrowersController < ApplicationController
 
+  load_and_authorize_resource
+
   respond_to :html, :json
 
   # GET /borrowers
   # GET /borrowers.json
   def index
-    @borrowers = BorrowerDecorator.all
     respond_with(@borrowers)
   end
 

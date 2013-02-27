@@ -25,131 +25,143 @@ describe BorrowersController do
   # update the return value of this method accordingly.
   let(:valid_attributes) { FactoryGirl.attributes_for(:borrower) }
 
-  describe "GET index" do
-    it "assigns all borrowers as @borrowers" do
-      borrower = Borrower.create! valid_attributes
-      get :index, {}
-      assigns(:borrowers).should eq([borrower])
-    end
-  end
 
-  describe "GET show" do
-    it "assigns the requested borrower as @borrower" do
-      borrower = Borrower.create! valid_attributes
-      get :show, {:id => borrower.to_param}
-      assigns(:borrower).should eq(borrower)
-    end
-  end
-
-  describe "GET new" do
-    it "assigns a new borrower as @borrower" do
-      get :new, {}
-      assigns(:borrower).should be_a_new(Borrower)
-    end
-  end
-
-  describe "GET edit" do
-    it "assigns the requested borrower as @borrower" do
-      borrower = Borrower.create! valid_attributes
-      get :edit, {:id => borrower.to_param}
-      assigns(:borrower).should eq(borrower)
-    end
-  end
-
-  describe "POST create" do
-    describe "with valid params" do
-      it "creates a new Borrower" do
-        expect {
-          post :create, {:borrower => valid_attributes}
-        }.to change(Borrower, :count).by(1)
+  context 'as an anonymous user' do
+    describe "GET index" do
+      it 'does not allow access' do
+        get :index
+        response.should redirect_to(root_url)
       end
+    end
+  end
 
-      it "assigns a newly created borrower as @borrower" do
-        post :create, {:borrower => valid_attributes}
-        assigns(:borrower).should be_a(Borrower)
-        assigns(:borrower).should be_persisted
-      end
+  context 'as a logged in user' do
+    let(:user) { FactoryGirl.create(:user) }
+    let(:borrower) { FactoryGirl.create(:borrower, user: user) }
 
-      it "redirects to the created borrower" do
-        post :create, {:borrower => valid_attributes}
-        response.should redirect_to(Borrower.last)
+    before do
+      sign_in user
+    end
+
+    describe 'GET index' do
+      it 'assigns all the borrowers of this user as @borrowers' do
+        FactoryGirl.create(:borrower)
+        get :index
+        assigns(:borrowers).should eq([borrower])
       end
     end
 
-    describe "with invalid params" do
-      it "assigns a newly created but unsaved borrower as @borrower" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Borrower.any_instance.stub(:save).and_return(false)
-        post :create, {:borrower => {}}
+    describe "GET show" do
+      it "assigns the requested borrower as @borrower" do
+        get :show, {:id => borrower.to_param}
+        assigns(:borrower).should eq(borrower)
+      end
+    end
+
+    describe "GET new" do
+      it "assigns a new borrower as @borrower" do
+        get :new, {}
         assigns(:borrower).should be_a_new(Borrower)
       end
-
-      it "re-renders the 'new' template" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Borrower.any_instance.stub(:save).and_return(false)
-        post :create, {:borrower => {}}
-        response.should render_template("new")
-      end
     end
-  end
 
-  describe "PUT update" do
-    describe "with valid params" do
-      it "updates the requested borrower" do
-        borrower = Borrower.create! valid_attributes
-        # Assuming there are no other borrowers in the database, this
-        # specifies that the Borrower created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        Borrower.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, {:id => borrower.to_param, :borrower => {'these' => 'params'}}
-      end
-
+    describe "GET edit" do
       it "assigns the requested borrower as @borrower" do
-        borrower = Borrower.create! valid_attributes
-        put :update, {:id => borrower.to_param, :borrower => valid_attributes}
+        get :edit, {:id => borrower.to_param}
         assigns(:borrower).should eq(borrower)
-      end
-
-      it "redirects to the borrower" do
-        borrower = Borrower.create! valid_attributes
-        put :update, {:id => borrower.to_param, :borrower => valid_attributes}
-        response.should redirect_to(borrower)
       end
     end
 
-    describe "with invalid params" do
-      it "assigns the borrower as @borrower" do
-        borrower = Borrower.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Borrower.any_instance.stub(:save).and_return(false)
-        put :update, {:id => borrower.to_param, :borrower => {}}
-        assigns(:borrower).should eq(borrower)
+    describe "POST create" do
+      describe "with valid params" do
+        it "creates a new Borrower" do
+          expect {
+            post :create, {:borrower => valid_attributes}
+          }.to change(Borrower, :count).by(1)
+        end
+
+        it "assigns a newly created borrower as @borrower" do
+          post :create, {:borrower => valid_attributes}
+          assigns(:borrower).should be_a(Borrower)
+          assigns(:borrower).should be_persisted
+        end
+
+        it "redirects to the created borrower" do
+          post :create, {:borrower => valid_attributes}
+          response.should redirect_to(Borrower.last)
+        end
       end
 
-      it "re-renders the 'edit' template" do
-        borrower = Borrower.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Borrower.any_instance.stub(:save).and_return(false)
-        put :update, {:id => borrower.to_param, :borrower => {}}
-        response.should render_template("edit")
+      describe "with invalid params" do
+        it "assigns a newly created but unsaved borrower as @borrower" do
+          # Trigger the behavior that occurs when invalid params are submitted
+          Borrower.any_instance.stub(:save).and_return(false)
+          post :create, {:borrower => {}}
+          assigns(:borrower).should be_a_new(Borrower)
+        end
+
+        it "re-renders the 'new' template" do
+          # Trigger the behavior that occurs when invalid params are submitted
+          Borrower.any_instance.stub(:save).and_return(false)
+          post :create, {:borrower => {}}
+          response.should render_template("new")
+        end
       end
     end
-  end
 
-  describe "DELETE destroy" do
-    it "destroys the requested borrower" do
-      borrower = Borrower.create! valid_attributes
-      expect {
+    describe "PUT update" do
+      describe "with valid params" do
+        it "updates the requested borrower" do
+          # Assuming there are no other borrowers in the database, this
+          # specifies that the Borrower created on the previous line
+          # receives the :update_attributes message with whatever params are
+          # submitted in the request.
+          Borrower.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
+          put :update, {:id => borrower.to_param, :borrower => {'these' => 'params'}}
+        end
+
+        it "assigns the requested borrower as @borrower" do
+          put :update, {:id => borrower.to_param, :borrower => valid_attributes}
+          assigns(:borrower).should eq(borrower)
+        end
+
+        it "redirects to the borrower" do
+          put :update, {:id => borrower.to_param, :borrower => valid_attributes}
+          response.should redirect_to(borrower)
+        end
+      end
+
+      describe "with invalid params" do
+        it "assigns the borrower as @borrower" do
+          # Trigger the behavior that occurs when invalid params are submitted
+          Borrower.any_instance.stub(:save).and_return(false)
+          put :update, {:id => borrower.to_param, :borrower => {}}
+          assigns(:borrower).should eq(borrower)
+        end
+
+        it "re-renders the 'edit' template" do
+          # Trigger the behavior that occurs when invalid params are submitted
+          Borrower.any_instance.stub(:save).and_return(false)
+          put :update, {:id => borrower.to_param, :borrower => {}}
+          response.should render_template("edit")
+        end
+      end
+    end
+
+    describe "DELETE destroy" do
+      it "destroys the requested borrower" do
+        borrower
+        expect {
+          delete :destroy, {:id => borrower.to_param}
+        }.to change(Borrower, :count).by(-1)
+      end
+
+      it "redirects to the borrowers list" do
         delete :destroy, {:id => borrower.to_param}
-      }.to change(Borrower, :count).by(-1)
-    end
-
-    it "redirects to the borrowers list" do
-      borrower = Borrower.create! valid_attributes
-      delete :destroy, {:id => borrower.to_param}
-      response.should redirect_to(borrowers_url)
+        response.should redirect_to(borrowers_url)
+      end
     end
   end
+
 
 end
