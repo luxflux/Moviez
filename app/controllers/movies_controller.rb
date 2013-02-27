@@ -70,4 +70,12 @@ class MoviesController < ApplicationController
     end
     respond_with @movie
   end
+
+  # PUT /movies/1/returned
+  def returned
+    @movie.borrower = nil
+    @movie.save
+    respond_with @movie
+  end
+
 end

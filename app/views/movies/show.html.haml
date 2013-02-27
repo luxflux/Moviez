@@ -12,9 +12,12 @@
       .span2= model_class.human_attribute_name(:disc_number)
       .span2= @movie.disc_number
       .span6= @movie.watched
-    .row
-      .span2= model_class.human_attribute_name(:borrower)
-      .span8= @movie.borrower.title_value
+    - if can? :manage, @movie
+      .row
+        .span2= model_class.human_attribute_name(:borrower)
+        .span8
+          - if @movie.borrower
+            = @movie.borrower.title_value
     .row
       .span10= @movie.overview
 
@@ -41,4 +44,7 @@
     = link_to t('.edit', :default => t("helpers.links.edit")), edit_movie_path(@movie), :class => 'btn btn-primary'
     = link_to t('.auto_update_movie'), auto_update_movie_path(@movie), class: 'btn btn-warning', method: 'put'
     = link_to t('.destroy', :default => t("helpers.links.destroy")), movie_path(@movie), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
-    = link_to t('.lend.link'), '#loan-modal', :'data-toggle' => 'modal', class: 'btn btn-primary'
+    - unless @movie.borrower
+      = link_to t('.lend.link'), '#loan-modal', :'data-toggle' => 'modal', class: 'btn btn-primary'
+    - else
+      = link_to t('.lend.remove'), returned_movie_path(@movie), class: 'btn btn-primary', method: :put
