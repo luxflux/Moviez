@@ -5,6 +5,7 @@ class Ability
 
     if user
       can :manage, Movie, user_id: user.id
+      can :manage, Borrower, user_id: user.id
     end
 
     can :read, Movie
