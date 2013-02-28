@@ -7,6 +7,7 @@ Moviez::Application.routes.draw do
   resources :movies do
     put :auto_update, on: :member
     put :returned, on: :member
+    put :toggle_watched, on: :member
     resources :loans
   end
 

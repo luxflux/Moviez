@@ -1,7 +1,7 @@
 jQuery ->
 
-  $('.data-toggler .true').show()
-  $('.data-toggler .false').hide()
+  $('.data-toggler .visible-true').show()
+  $('.data-toggler .visible-false').hide()
 
   $('.data-toggler').on 'click', (event) ->
     element = $(this)

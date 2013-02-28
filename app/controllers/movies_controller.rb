@@ -79,4 +79,11 @@ class MoviesController < ApplicationController
     respond_with @movie
   end
 
+  # PUT /movies/1/toggle_watched
+  def toggle_watched
+    @movie.watched = !@movie.watched?
+    @movie.save
+    respond_with @movie
+  end
+
 end

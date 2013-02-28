@@ -13,9 +13,9 @@
       .span2= @movie.disc_number
       .span6
         - if can? :manage, @movie
-          %a.data-toggler{href: '#', data: {:'toggle-target' => 'toggle_watched'}}
-            %i.icon-check.toggle_watched{class: (@movie.watched?.to_s)}
-            %i.icon-check-empty.toggle_watched{class: (!@movie.watched?.to_s)}
+          %a.data-toggler{href: toggle_watched_movie_path(@movie, :json), data: {:'toggle-target' => 'toggle_watched', remote: true, method: :put}}
+            %i.icon-check.toggle_watched{class: "visible-#{@movie.watched?}"}
+            %i.icon-check-empty.toggle_watched{class: "visible-#{!@movie.watched?}"}
             = model_class.human_attribute_name(:watched)
     - if can? :manage, @movie
       .row
