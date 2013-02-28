@@ -17,10 +17,6 @@ class MovieDecorator < Draper::Base
     movie.disc_number ? movie.disc_number : h.t('movie.disc_number.none')
   end
 
-  def watched
-    h.t("movie.watched.#{movie.watched?}")
-  end
-
   def disc_number_and_watched
     [disc_number, watched.camelize(:lower)].to_sentence
   end
