@@ -27,6 +27,7 @@ class MoviesController < ApplicationController
 
   # GET /movies/1/edit
   def edit
+    @movie = MovieDecorator.decorate(@movie)
   end
 
   # POST /movies

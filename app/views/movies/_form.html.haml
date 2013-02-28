@@ -1,8 +1,12 @@
-= simple_form_for @movie, :html => { :class => 'form-horizontal' } do |f|
-  = f.input :title
-  = f.input :overview
-  = f.input :disc_number
-  = f.input :watched
+= simple_form_for @movie do |f|
+  .row
+    .span6
+      = f.input :title, input_html: {class: 'input-block-level'}
+    .span6
+      = f.input :disc_number, input_html: {class: 'input-block-level'}
+  .row
+    .span4= image_tag @movie.image
+    .span8= f.input :overview, input_html: {class: 'input-block-level', rows: 13}
   .form-actions
     = f.button :submit, :class => 'btn btn-primary'
     = link_to t('.cancel', :default => t("helpers.links.cancel")), movies_path, :class => 'btn'
