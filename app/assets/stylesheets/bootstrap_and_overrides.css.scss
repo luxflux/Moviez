@@ -45,6 +45,12 @@ h1,h2,h3,h4,h5 {
 h1.brand {
   font-family: Amaranth;
 }
+.data-toggler {
+  color: $textColor;
+  &:hover {
+    text-decoration: none;
+  }
+}
 
 @media (min-width: 1200px) {
   .movie-gallery img {
