@@ -19,34 +19,29 @@
   %body
     .container
       .row
-        .span6
+        .span12
           %h1.brand
             = link_to 'Moviezzz', root_path
-        .span6.tr
-          %h1
-            - if not current_path?(movies_path) and not current_path?(root_path)
-              %a.pull-right{href: movies_path}
-                %i.icon-arrow-left
-                Back to list
+      .row
+        .span12
+          %ul.nav.nav-tabs
+            = navigation_link movies_path, :film
+            - unless can?(:manage, Movie)
+              = navigation_link new_user_session_path, :signin
             - else
-              - if can?(:manage, Movie)
-                %a.pull-right{href: new_movie_path}
-                  Add movie
-                  %i.icon-arrow-right
-              - else
-                %a.pull-right{href: new_user_session_path}
-                  Sign in
-                  %i.icon-arrow-right
+              = navigation_link new_movie_path, :plus
+              = navigation_link borrowers_path, :group
+              = navigation_link destroy_user_session_path, :signout, method: :delete
+          .tab-content
+            %movies.tab-pane
+            .row
+              .span12
+                - flash.each do |msg_type, message| # error, success and info
+                  .alert{class: "alert-#{msg_type}"}
+                    %button.close{type: :button, :'data-dismiss' => :alert} &times;
+                    %span= message
 
-  .container
-    .row
-      .span12
-        - flash.each do |msg_type, message| # error, success and info
-          .alert{class: "alert-#{msg_type}"}
-            %button.close{type: :button, :'data-dismiss' => :alert} &times;
-            %span= message
-
-    .row
-      .span12
-        = yield
+            .row
+              .span12
+                = yield
 
