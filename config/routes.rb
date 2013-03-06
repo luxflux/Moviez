@@ -13,5 +13,5 @@ Moviez::Application.routes.draw do
 
   resources :borrowers
 
-  root :to => 'movies#index'
+  root to: redirect('/movies')
 end
