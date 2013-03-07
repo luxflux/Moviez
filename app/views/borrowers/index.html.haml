@@ -1,23 +1,15 @@
-%h1 Listing borrowers
+%h1
+  Listing borrowers
+  %small.pull-right
+    = link_to content_tag(:i, ' New', class: 'icon-plus'), new_borrower_path, class: 'btn'
 
-%table
-  %tr
-    %th First name
-    %th Family name
-    %th Email
-    %th
-    %th
-    %th
-
-  - @borrowers.each do |borrower|
+%table.table.table-striped
+  %thead
     %tr
-      %td= borrower.first_name
-      %td= borrower.family_name
-      %td= borrower.email
-      %td= link_to 'Show', borrower
-      %td= link_to 'Edit', edit_borrower_path(borrower)
-      %td= link_to 'Destroy', borrower, method: :delete, data: { confirm: 'Are you sure?' }
+      %th= Borrower.human_attribute_name(:first_name)
+      %th= Borrower.human_attribute_name(:family_name)
+      %th= Borrower.human_attribute_name(:email)
+      %th
 
-%br
-
-= link_to 'New Borrower', new_borrower_path
+  %tbody
+    = render @borrowers
