@@ -1,5 +1,8 @@
 jQuery ->
 
+  $('.popover-trigger').popover
+    html: true
+
   paginate = (url, total_pages, model, target) ->
 
     pagination_enabled = true

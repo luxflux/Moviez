@@ -5,6 +5,12 @@ class BorrowerDecorator < Draper::Base
     "#{first_name} #{family_name}"
   end
 
+  def movies_list
+    movies.map do |movie|
+      movie.title
+    end
+  end
+
   def as_json(options = {})
     {
       id: id,

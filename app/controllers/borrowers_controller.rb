@@ -7,6 +7,7 @@ class BorrowersController < ApplicationController
   # GET /borrowers
   # GET /borrowers.json
   def index
+    @borrowers = BorrowerDecorator.decorate @borrowers
     respond_with(@borrowers)
   end
 

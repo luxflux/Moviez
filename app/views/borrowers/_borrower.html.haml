@@ -2,7 +2,9 @@
   %td= borrower.first_name
   %td= borrower.family_name
   %td= borrower.email
-  %td= borrower.movies.length
+  %td
+    %span.popover-trigger{data: {trigger: :hover, content: popover_content(borrower.movies_list)}, title: 'Lend movies'}
+      = borrower.movies.length
   %td
     .btn-group.pull-right
       = icon_link borrower, :'zoom-in', class: 'btn'
