@@ -16,7 +16,7 @@ $linkColor: #297D5B;
 @import "bootstrap-responsive";
 @import "font-awesome";
 
-.btn {
+.btn, .btn-group .btn:first-child, .btn-group .btn:last-child {
   @include border-radius(0px);
   @include override_gradient_vertical;
 }

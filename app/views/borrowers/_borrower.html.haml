@@ -2,6 +2,9 @@
   %td= borrower.first_name
   %td= borrower.family_name
   %td= borrower.email
-  %td= link_to 'Edit', edit_borrower_path(borrower)
-  %td= link_to 'Destroy', borrower, method: :delete, data: { confirm: 'Are you sure?' }
+  %td
+    .btn-group.pull-right
+      = icon_link borrower, :'zoom-in', class: 'btn'
+      = icon_link edit_borrower_path(borrower), :edit, class: 'btn'
+      = icon_link borrower, :remove, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn'
 
