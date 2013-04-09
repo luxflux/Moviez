@@ -1,25 +1,25 @@
 class MovieFullPreviewDecorator < MovieShortPreviewDecorator
 
-  allows :id, :title, :tagline, :overview, :imdb_id
+  delegate :id, :title, :tagline, :overview, :imdb_id
 
   def cover_url
-    model.posters.first.sizes.w154.url
+    source.posters.first.sizes.w154.url
   end
 
   def length
-    model.runtime
+    source.runtime
   end
 
   def languages
-    model.spoken_languages.collect { |lang| lang.name }.to_sentence
+    source.spoken_languages.collect { |lang| lang.name }.to_sentence
   end
 
   def genres
-    model.genres.collect { |genre| genre.name }.to_sentence
+    source.genres.collect { |genre| genre.name }.to_sentence
   end
 
   def cast
-    model.cast[0..3].collect { |cast| "#{cast.name} (#{cast.character})" }.to_sentence
+    source.cast[0..3].collect { |cast| "#{cast.name} (#{cast.character})" }.to_sentence
   end
 
   def as_json(options = {})

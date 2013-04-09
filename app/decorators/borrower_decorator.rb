@@ -1,5 +1,7 @@
-class BorrowerDecorator < Draper::Base
+class BorrowerDecorator < Draper::Decorator
   decorates :borrower
+
+  delegate_all
 
   def title_value
     "#{first_name} #{family_name}"

@@ -1,9 +1,9 @@
-class MovieShortPreviewDecorator < Draper::Base
+class MovieShortPreviewDecorator < Draper::Decorator
 
-  allows :id, :title
+  delegate :id, :title
 
   def year
-    Date.parse(model.release_date).year rescue 'unknown'
+    Date.parse(source.release_date).year rescue 'unknown'
   end
 
   def as_json(options = {})

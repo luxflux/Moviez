@@ -1,20 +1,22 @@
-class MovieDecorator < Draper::Base
+class MovieDecorator < Draper::Decorator
   decorates :movie
 
+  delegate_all
+
   def image
-    if movie.image_url
-      movie.image_url
+    if source.image_url
+      source.image_url
     else
       'http://www.placehold.it/100x150'
     end
   end
 
   def url
-    h.movie_path movie
+    h.movie_path source
   end
 
   def disc_number
-    movie.disc_number ? movie.disc_number : h.t('movie.disc_number.none')
+    source.disc_number ? source.disc_number : h.t('movie.disc_number.none')
   end
 
   def borrower
