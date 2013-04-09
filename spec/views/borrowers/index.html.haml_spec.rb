@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "borrowers/index" do
   before(:each) do
-    assign(:borrowers, [
+    assign(:borrowers, BorrowerDecorator.decorate_collection([
       stub_model(Borrower,
         :first_name => "First Name",
         :family_name => "Family Name",
@@ -13,7 +13,7 @@ describe "borrowers/index" do
         :family_name => "Family Name",
         :email => "Email"
       )
-    ])
+    ]))
   end
 
   it "renders a list of borrowers" do
