@@ -3,7 +3,7 @@ class TMDBMoviesController < ApplicationController
   respond_to :json
 
   def index
-    @movies = MovieShortPreviewDecorator.decorate(TMDB::Movie.search(title: params[:title]))
+    @movies = MovieShortPreviewDecorator.decorate_collection(TMDB::Movie.search(title: params[:title]))
     render json: @movies
   end
 
