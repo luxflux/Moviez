@@ -36,4 +36,4 @@ jQuery ->
 
   for pagination in $('#pagination')
     pagination = $(pagination)
-    paginate pagination.data('url'), pagination.data('total_pages'), pagination.data('model'), pagination.data('target')
+    paginate pagination.data('url'), pagination.data('total-pages'), pagination.data('model'), pagination.data('target')
