@@ -30,7 +30,7 @@ describe BorrowersController do
     describe "GET index" do
       it 'does not allow access' do
         get :index
-        response.should redirect_to(root_url)
+        response.should redirect_to(movies_url)
       end
     end
   end
