@@ -3,6 +3,6 @@ class ApplicationController < ActionController::Base
 
   rescue_from(CanCan::AccessDenied) do
     flash[:error] = I18n.t('cancan.access_denied')
-    redirect_to :root
+    redirect_to movies_path
   end
 end

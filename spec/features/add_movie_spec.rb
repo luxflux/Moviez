@@ -33,7 +33,7 @@ describe 'add a movie' do
   context 'as an unauthorized user' do
     it 'does not allow access' do
       visit new_movie_path
-      current_path.should eq('/')
+      current_path.should eq('/movies')
       page.should have_content('not authorized')
     end
   end

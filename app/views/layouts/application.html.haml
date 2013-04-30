@@ -33,7 +33,6 @@
               = navigation_link borrowers_path, :group
               = navigation_link destroy_user_session_path, :signout, method: :delete
           .tab-content
-            %movies.tab-pane
             .row
               .span12
                 - flash.each do |msg_type, message| # error, success and info
